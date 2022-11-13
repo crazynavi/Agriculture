@@ -1,0 +1,13 @@
+{
+  "short_name": "AgResource Dashboard",
+  "name": "AgResource Dashboard",
+  "icons": [
+    {
+      "src": "logo192.png"      
+    }   
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
