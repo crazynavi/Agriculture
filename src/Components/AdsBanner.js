@@ -12,7 +12,7 @@ const fetchAdsData = async() => {
             setBanner(JSON.parse(response.data))
         });  
     }catch(error){
-        console.log(error.message);
+        // console.log(error.message);
     }  
 }
 

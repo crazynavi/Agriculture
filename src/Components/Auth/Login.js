@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import logo from "../../assets/US-Logo.png";
 import Button from "./Button";
@@ -18,6 +18,7 @@ async function loginUser(credentials) {
 }
 
 export default function Login({ setToken }) {
+  const passwordERef = useRef();
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   const setFiled = (filedName, fieldValue) => {
@@ -34,15 +35,30 @@ export default function Login({ setToken }) {
       email:username,
       password,
     });
+    if (data.message == 'success') {
+      setToken(data);
+    } else {
+      setUserName("");
+      setPassword("");
+      alert("email and password is not valid");
+    }
+  };
+  const handleSubmit2 = async () => {
+    const {data} = await loginUser({
+      email:username,
+      password,
+    });
     console.log(data);
     if (data.message == 'success') {
       setToken(data.token_data);
-      localStorage.setItem('userInfo', JSON.stringify(data.user_data));
+      localStorage.setItem('userInfo', JSON.stringify(data.user_role));
     } else {
-      alert("email and password is not valid")
+      setUserName("");
+      setPassword("");
+      alert("email and password is not valid");
     }
   };
-
+  
   return (
     <div className="login-container">
       <div className="logo">
@@ -56,14 +72,17 @@ export default function Login({ setToken }) {
         style={style}
         field="username"
         setFiled={setFiled}
+        onSubmitKeyEvent={()=>passwordERef.current.focus()}
       />
       <FluidInput
+        ref={passwordERef}
         type="password"
         label="password"
         id="password"
         style={style}
         field="password"
         setFiled={setFiled}
+        onSubmitKeyEvent = {handleSubmit2}
       />
       <Button
         buttonText="log in"
