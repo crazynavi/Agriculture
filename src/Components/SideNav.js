@@ -18,15 +18,6 @@ const redirectToHome = () => {
 };
 const SideNav = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  // // const role = JSON.parse(localStorage.getItem("tokenData")).user_role;
-  // let role = [2656,2658,2669,2771,2663,2666,2635,2644,2650,2652,2734];
-  // const isAllowed = (list) => {
-  //   let isAllowed = false;
-  //   role.forEach((element) => {
-  //     if (list.indexOf(element) > -1) isAllowed = true;
-  //   });
-  //   return isAllowed;
-  // };
   return (
     <div className="side-nav-container">
       <div>
@@ -90,6 +81,8 @@ const SideNav = () => {
             />
           </div>
           <div>
+            <div className="d-flex" style={{justifyContent :"space-around"}}>
+            <h4>{(JSON.parse(localStorage.getItem("tokenData")).user_data.user_name).replace(/^./, str => str.toUpperCase())}</h4>
             <button
               onClick={() => {
                 localStorage.removeItem("tokenData");
@@ -98,8 +91,8 @@ const SideNav = () => {
             >
               sign out
             </button>
-            <small>Client</small>
-            <h3>BRANDON STICKLER</h3>
+            </div>
+            <h3>{`${JSON.parse(localStorage.getItem("tokenData")).user_data.first_name??""} ${JSON.parse(localStorage.getItem("tokenData")).user_data.last_name??""}`}</h3>
           </div>
         </div>
       </div>
