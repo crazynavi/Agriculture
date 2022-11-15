@@ -1344,3 +1344,49 @@
     /* .top-tabs>div.active {
     } */
 }
+
+.instructions {
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    background: #fff;
+    color: red;
+    padding: 0;
+    position: relative;
+    bottom: -10px;
+    margin: -5px 0px 10px 10px;
+}
+
+.instructions>svg {
+	margin-right: 0.5rem;
+}
+
+.offscreen {
+	position: absolute;
+	left: -9999px;
+}
+
+.hide {
+	display: none;
+}
+
+.valid {
+	color: limegreen;
+	margin-left: 0.25rem;
+}
+
+.invalid {
+	color: red;
+	margin-left: 0.25rem;
+}
+
+.errmsg {
+	background-color: lightpink;
+	color: firebrick;
+	font-weight: bold;
+	padding: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+.required-icon {
+    color: red;
+    font-size: 1.3rem;
+}

@@ -34,7 +34,7 @@ const FluidInput = forwardRef((props, ref) => {
   };
   useEffect(() => {
     if(value!==""){
-      setInputClass((inputClass)=>inputClass+" fluid-input--open");
+      setInputClass((inputClass)=>inputClass+" fluid-input--focus");
     }
     return () => {
     }
