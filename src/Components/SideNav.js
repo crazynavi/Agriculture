@@ -80,7 +80,7 @@ const SideNav = () => {
               alt=""
             />
           </div>
-          <div>
+          <div className='flex-grow-1'>
             <div className="d-flex" style={{justifyContent :"space-around"}}>
             <h4>{(JSON.parse(localStorage.getItem("tokenData")).user_data.user_name).replace(/^./, str => str.toUpperCase())}</h4>
             <button
@@ -89,7 +89,7 @@ const SideNav = () => {
                 redirectToHome();
               }}
             >
-              sign out
+              Sign out
             </button>
             </div>
             <h3>{`${JSON.parse(localStorage.getItem("tokenData")).user_data.first_name??""} ${JSON.parse(localStorage.getItem("tokenData")).user_data.last_name??""}`}</h3>

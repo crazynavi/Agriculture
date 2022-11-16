@@ -124,6 +124,10 @@
     display: flex !important;
 }
 
+.flex-grow-1{
+    flex-grow:1;
+}
+
 .d-none {
     display: none !important;
 }

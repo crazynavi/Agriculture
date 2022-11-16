@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AiOutlineMinus } from "react-icons/ai";
+import { FaExclamationCircle, FaExclamationTriangle } from "react-icons/fa";
 const style = {
   appearance: "none",
   backgroundColor: "#EDF1F4",
@@ -22,7 +23,8 @@ const OCCUPATION_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^[a-zA-Z0-9!@#$%]{6,20}$/;
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-const PHONE_NUMBER_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+// const PHONE_NUMBER_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+const PHONE_NUMBER_REGEX = /^[0-9]{11,13}$/;
 
 const PersonalForm = () => {
   const userRef = useRef();
@@ -396,7 +398,7 @@ const PersonalForm = () => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              Phone number format is +x xxx-xxx-xxxx
+              Please input valid phone number
             </p>
           </div>
           <div className="form-items w-equal-width">
