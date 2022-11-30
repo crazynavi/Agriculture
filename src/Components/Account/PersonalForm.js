@@ -6,7 +6,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AiOutlineMinus } from "react-icons/ai";
-import { FaExclamationCircle, FaExclamationTriangle } from "react-icons/fa";
 const style = {
   appearance: "none",
   backgroundColor: "#EDF1F4",
@@ -26,7 +25,18 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 // const PHONE_NUMBER_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 const PHONE_NUMBER_REGEX = /^[0-9]{11,13}$/;
 
-const PersonalForm = () => {
+const PersonalForm = (props) => {
+  const { updateState, currentTab } = props;
+  useEffect(() => {
+    console.log(updateState);
+    console.log(currentTab);
+    if(currentTab==="personal", updateState!==0){
+      alert("hello world");
+    }
+  }, [updateState])
+
+
+  
   const userRef = useRef();
   const errRef = useRef();
 
@@ -73,11 +83,6 @@ const PersonalForm = () => {
   useEffect(() => {
     userRef.current.focus();
   }, []);
-
-  //   useEffect(() => {
-  //     setValidName(USER_REGEX.test(user));
-  //   }, [user]);
-
   useEffect(() => {
     setValidFirstName(USER_REGEX.test(firstName));
   }, [firstName]);
@@ -98,7 +103,7 @@ const PersonalForm = () => {
   }, [phoneNumber]);
 
   useEffect(() => {
-    setValidOccupation(occupation!==""?true:false);
+    setValidOccupation(occupation !== "" ? true : false);
   }, [occupation]);
 
   useEffect(() => {
@@ -117,7 +122,7 @@ const PersonalForm = () => {
         <div className="form-group mt-4 mb-4">
           <div className="form-items">
             <label htmlFor="username">
-              <span class="required-icon">* </span>
+              <span className="required-icon">* </span>
               First Name
               <FontAwesomeIcon
                 icon={faCheck}
@@ -136,7 +141,6 @@ const PersonalForm = () => {
               autoComplete="off"
               onChange={(e) => setFirstName(e.target.value)}
               value={firstName}
-              required
               aria-invalid={validFirstName ? "false" : "true"}
               aria-describedby="uidnote"
               onFocus={() => setFirstNameFocus(true)}
@@ -145,9 +149,7 @@ const PersonalForm = () => {
             <p
               id="uidnote"
               className={
-                firstName && !validFirstName
-                  ? "instructions"
-                  : "offscreen"
+                firstName && !validFirstName ? "instructions" : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
@@ -155,8 +157,8 @@ const PersonalForm = () => {
             </p>
           </div>
           <div className="form-items">
-            <label htmlFor="username">
-              <span class="required-icon">* </span>
+            <label htmlFor="lastname">
+              <span className="required-icon">* </span>
               Last Name
               <FontAwesomeIcon
                 icon={faCheck}
@@ -169,7 +171,7 @@ const PersonalForm = () => {
             </label>
             <input
               type="text"
-              id="username"
+              id="lastname"
               name={"last_name"}
               autoComplete="off"
               onChange={(e) => setLasttName(e.target.value)}
@@ -182,9 +184,7 @@ const PersonalForm = () => {
             <p
               id="uidnote"
               className={
-                lastName && !validLastName
-                  ? "instructions"
-                  : "offscreen"
+                lastName && !validLastName ? "instructions" : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
@@ -203,8 +203,8 @@ const PersonalForm = () => {
             />
           </div>
           <div className="form-items">
-            <label htmlFor="username">
-              <span class="required-icon">* </span>
+            <label htmlFor="occupation">
+              <span className="required-icon">* </span>
               Occupation
               <FontAwesomeIcon
                 icon={faCheck}
@@ -219,7 +219,7 @@ const PersonalForm = () => {
               className="form-control"
               style={style}
               name="occupation"
-              id="username"
+              id="occupation"
               autoComplete="off"
               value={occupation}
               onChange={(e) => {
@@ -265,9 +265,7 @@ const PersonalForm = () => {
             <p
               id="uidnote"
               className={
-                occupation && !validOccupation
-                  ? "instructions"
-                  : "offscreen"
+                occupation && !validOccupation ? "instructions" : "offscreen"
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
@@ -330,8 +328,45 @@ const PersonalForm = () => {
             />
           </div>
           <div className="form-items">
-            <label htmlFor="username">
-              <span class="required-icon">* </span>
+            <label htmlFor="phone">
+              <span className="required-icon">* </span>
+              Phone Number
+              <FontAwesomeIcon
+                icon={faCheck}
+                className={validPhoneNumber ? "valid" : "hide"}
+              />
+              <FontAwesomeIcon
+                icon={faTimes}
+                className={
+                  validPhoneNumber || !phoneNumber ? "hide" : "invalid"
+                }
+              />
+            </label>
+            <input
+              type="text"
+              name="phone_number"
+              id="phone"
+              autoComplete="off"
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              value={phoneNumber}
+              aria-invalid={phoneNumber ? "false" : "true"}
+              aria-describedby="uidnote"
+              onFocus={() => setPhoneNumberFocus(true)}
+              onBlur={() => setPhoneNumberFocus(false)}
+            />
+            <p
+              id="uidnote"
+              className={
+                phoneNumber && !validPhoneNumber ? "instructions" : "offscreen"
+              }
+            >
+              <FontAwesomeIcon icon={faInfoCircle} />
+              Please input valid phone number
+            </p>
+          </div>
+          <div className="form-items">
+            <label htmlFor="email">
+              <span className="required-icon">* </span>
               Email
               <FontAwesomeIcon
                 icon={faCheck}
@@ -344,7 +379,7 @@ const PersonalForm = () => {
             </label>
             <input
               type="text"
-              id="username"
+              id="email"
               name={"email"}
               autoComplete="off"
               onChange={(e) => setEmail(e.target.value)}
@@ -362,48 +397,11 @@ const PersonalForm = () => {
               Invalid email
             </p>
           </div>
-          <div className="form-items">
-            <label htmlFor="username">
-              <span class="required-icon">* </span>
-              Phone Number
-              <FontAwesomeIcon
-                icon={faCheck}
-                className={validPhoneNumber ? "valid" : "hide"}
-              />
-              <FontAwesomeIcon
-                icon={faTimes}
-                className={
-                  validPhoneNumber || !phoneNumber ? "hide" : "invalid"
-                }
-              />
-            </label>
-            <input
-              type="text"
-              name="phone_number"
-              id="username"
-              autoComplete="off"
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              value={phoneNumber}
-              aria-invalid={phoneNumber ? "false" : "true"}
-              aria-describedby="uidnote"
-              onFocus={() => setPhoneNumberFocus(true)}
-              onBlur={() => setPhoneNumberFocus(false)}
-            />
-            <p
-              id="uidnote"
-              className={
-              phoneNumber && !validPhoneNumber
-                  ? "instructions"
-                  : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Please input valid phone number
-            </p>
-          </div>
+
           <div className="form-items w-equal-width">
-            
-            <label><span class="required-icon">* </span>Current Password</label>
+            <label>
+              <span className="required-icon">* </span>Current Password
+            </label>
             <input
               name={"password"}
               value={password}
@@ -415,7 +413,7 @@ const PersonalForm = () => {
           </div>
           <div className="form-items w-equal-width">
             <label htmlFor="password">
-              <span class="required-icon">* </span>
+              <span className="required-icon">* </span>
               New Password
               <FontAwesomeIcon
                 icon={faCheck}
@@ -447,7 +445,7 @@ const PersonalForm = () => {
           </div>
           <div className="form-items w-equal-width">
             <label htmlFor="confirm_pwd">
-              <span class="required-icon">* </span>
+              <span className="required-icon">* </span>
               Confirm Password
               <FontAwesomeIcon
                 icon={faCheck}

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faRightFromBracket} from "@fortawesome/free-solid-svg-icons"
 import { isRoleAllowed } from "../utils/isRoleAllowed";
 import Logo from "../assets/logo.png";
 import { IoHome } from "react-icons/io5";
@@ -84,12 +86,14 @@ const SideNav = () => {
             <div className="d-flex" style={{justifyContent :"space-around"}}>
             <h4>{(JSON.parse(localStorage.getItem("tokenData")).user_data.user_name).replace(/^./, str => str.toUpperCase())}</h4>
             <button
+            style={{fontSize:"1rem"}}
               onClick={() => {
                 localStorage.removeItem("tokenData");
                 redirectToHome();
               }}
-            >
-              Sign out
+            > 
+               <FontAwesomeIcon icon={faRightFromBracket} />
+               <span>  Sign out</span>
             </button>
             </div>
             <h3>{`${JSON.parse(localStorage.getItem("tokenData")).user_data.first_name??""} ${JSON.parse(localStorage.getItem("tokenData")).user_data.last_name??""}`}</h3>

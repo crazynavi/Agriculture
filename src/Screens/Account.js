@@ -14,22 +14,26 @@ const Account = () => {
   const [showModal1, setShowModal1] = useState(false)
   const [showModal2, setShowModal2] = useState(false)
   const [showDiscountModal, setShowDiscountModal] = useState(false)
+  const [updateState, setUpdateState] = useState(0);
 
+  
 
-  const handleSubmit = () =>{
-
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    setUpdateState(updateState=>updateState+1)
   }
+  console.log(updateState);
   return (
     <>
       <div className='top-tabs'>
-        <div onClick={() => setTab('personal')} className={tab === 'personal' ? 'active': ''}>PERSONAL</div>
+        <div onClick={() => {setTab('personal');setUpdateState(0)}} className={tab === 'personal' ? 'active': ''}>PERSONAL</div>
         <div onClick={() => setTab('business')} className={tab === 'business' ? 'active': ''}>BUSINESS</div>
         <div onClick={() => setTab('subscriptions')} className={tab === 'subscriptions' ? 'active': ''}>SUBSCRIPTIONS</div>
         <div onClick={() => setTab('payment')} className={tab === 'payment' ? 'active': ''}>PAYMENT</div>
       </div>
-      <form className='form-container d-flex justify-content-between'>
+      <form className='form-container d-flex justify-content-between' onSubmit = {handleSubmit}>
         <div className='form-section'>
-          {tab === 'personal' && <PersonalForm  />}
+          {tab === 'personal' && <PersonalForm  updateState={updateState} currentTab={tab}/>}
           {tab === 'business' && <BusinessForm  />}
           {tab === 'subscriptions' && <SubscriptionTable setShowModal1={setShowModal1} />}
           {tab === 'payment' && <PaymentForm  /> }

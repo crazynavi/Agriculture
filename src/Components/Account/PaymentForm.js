@@ -32,9 +32,9 @@ const PaymentForm = () => {
                             <div className='form-group p-0'>
                                 <div className='form-items w-100'>
                                     <label>Default:</label>
-                                    <label class="container">
+                                    <label className="container">
                                         <input type="checkbox" />
-                                        <span class="checkmark"></span>
+                                        <span className="checkmark"></span>
                                     </label>
                                 </div>
                                 <div className='form-items w-100'>
@@ -69,9 +69,9 @@ const PaymentForm = () => {
                             <div className='form-group p-0'>
                                 <div className='form-items w-100'>
                                     <label>Default:</label>
-                                    <label class="container">
+                                    <label className="container">
                                         <input type="checkbox" />
-                                        <span class="checkmark"></span>
+                                        <span className="checkmark"></span>
                                     </label>
                                 </div>
                                 <div className='form-items w-100'>
@@ -106,9 +106,9 @@ const PaymentForm = () => {
                             <div className='form-group p-0'>
                                 <div className='form-items w-100'>
                                     <label>Default:</label>
-                                    <label class="container">
+                                    <label className="container">
                                         <input type="checkbox" />
-                                        <span class="checkmark"></span>
+                                        <span className="checkmark"></span>
                                     </label>
                                 </div>
                                 <div className='form-items w-100'>
