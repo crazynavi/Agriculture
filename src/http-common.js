@@ -1,8 +1,9 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "http://localhost/agresource/wp-json/ag/v1/",    
+    baseURL: "http://agresource.redcliffeltd.com/wp-json/ag/v1/",    
     headers: {
+        Accept: "application/json",
         "Content-type": "application/json"
     }
 })
