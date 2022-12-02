@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import http from '../../http-common';
+import http from '../../utils/http-common';
 import CurrentWeather from '../Weather/CurrentWeather'
 import ForecastWeather from '../Weather/ForecastWeather'
 import LoadingSpinner from '../LoadingSpinner';

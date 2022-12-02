@@ -13,7 +13,7 @@ import ReportLatam from "./Screens/ReportLatam";
 import ReportClimate from "./Screens/ReportClimate";
 import Privacy from "./Screens/Privacy";
 import Login from "./Components/Auth/Login";
-import http from "./http-common";
+import http from "./utils/http-common";
 import { useEffect } from "react";
 
 function App() {
@@ -26,7 +26,6 @@ function App() {
   useEffect(() => {
     const TIMESTAMP = Date.now();
     if (token) {
-      console.log("fewfwe");
       if (!JSON.parse(localStorage.getItem("timestamp"))) {
         localStorage.setItem("timestamp", JSON.stringify({
           initial: TIMESTAMP,

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import logo from "../../assets/US-Logo.png";
 import Button from "./Button";
 import FluidInput from "./FluidInput";
-import API from '../../http-common';
+import http from '../../utils/http-common';
 
 
 
@@ -23,7 +23,7 @@ export default function Login({ setToken }) {
   const style = {
     margin: "15px 0",
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     if (isEmpty || isPassEmpty) {
       if (isEmpty) {
         setFirstEmpty(true);
@@ -34,17 +34,12 @@ export default function Login({ setToken }) {
       return;
     }
     e.preventDefault();
-    const {data} = await API.post('authentication', JSON.stringify({
+    http.post('authentication', JSON.stringify({
       email: username,
       password,
-    }));
-    // const data = data1.data;
-    console.log(data);
-    if (data.data.message == "success") {
-      setToken(data.data);
-    } else {
-      setIsValidated(false);
-    }
+    }))
+      .then((res) => { if (res.data.data.message == "success") { setToken(res.data.data) } })
+      .catch((err) => { setIsValidated(false) });
   };
   const handleSubmit2 = async () => {
     if (isEmpty) {
@@ -55,17 +50,12 @@ export default function Login({ setToken }) {
       setFirstPwsEmpty(true);
       return;
     }
-    const {data} = await API.post('authentication', JSON.stringify({
+    http.post('authentication', JSON.stringify({
       email: username,
       password,
-    }));
-    // const data = data1.data;
-    console.log(data);
-    if (data.data.message == "success") {
-      setToken(data.data);
-    } else {
-      setIsValidated(false);
-    }
+    }))
+      .then((res) => { if (res.data.data.message == "success") { setToken(res.data.data) } })
+      .catch((err) => { setIsValidated(false) });
   };
 
   return (

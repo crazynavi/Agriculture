@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import LoadingSpinner from '../Components/LoadingSpinner';
-import http from '../http-common';
+import http from '../utils/http-common';
 
 
 function Privacy() {

@@ -7,7 +7,7 @@ import DiscountModal from '../Components/Account/DiscountModal';
 import PaymentForm from '../Components/Account/PaymentForm';
 import PersonalForm from '../Components/Account/PersonalForm';
 import SubscriptionTable from '../Components/Account/SubscriptionTable';
-
+import http from '../utils/http-common';
 
 const Account = () => {
   const [tab, setTab] = useState('personal')
@@ -15,7 +15,12 @@ const Account = () => {
   const [showModal2, setShowModal2] = useState(false)
   const [showDiscountModal, setShowDiscountModal] = useState(false)
   const [updateState, setUpdateState] = useState(0);
-
+  
+  useEffect(() => {
+    http.get("account").then((res) => {
+      console.log(res.data.data);
+    });
+  });
   
 
   const handleSubmit = (e) =>{
