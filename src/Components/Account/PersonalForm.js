@@ -54,7 +54,7 @@ const PersonalForm = (props) => {
   const [validOccupation, setValidOccupation] = useState(false);
   const [occupationFocus, setOccupationFocus] = useState(false);
 
-  const [address, setAddress] = useState("");
+  // const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [userstate, setUserstate] = useState("");
@@ -272,7 +272,7 @@ const PersonalForm = (props) => {
               occupation field is required
             </p>
           </div>
-          <div className="form-items w-100">
+          {/* <div className="form-items w-100">
             <label>Address:</label>
             <input
               type={"text"}
@@ -282,7 +282,7 @@ const PersonalForm = (props) => {
                 setAddress(e.target.value);
               }}
             />
-          </div>
+          </div> */}
           <div className="form-items w-medium">
             <label>Country:</label>
             <input
