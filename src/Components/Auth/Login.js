@@ -3,27 +3,9 @@ import PropTypes from "prop-types";
 import logo from "../../assets/US-Logo.png";
 import Button from "./Button";
 import FluidInput from "./FluidInput";
-import API from  '../../http-common';
+import API from '../../http-common';
 
 
-async function loginUser(credentials) {
-
-  // return fetch(
-  //   "https://agresource.redcliffeltd.com/wp-json/ag/v1/authentication",
-  //   {
-  //     method: "POST",
-  //     error: function (e) {
-  //       console.log(e);
-  //     },
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(credentials),
-  //   }
-  // ).then((data) => data.json());
-  return API.post('authentication',JSON.stringify(credentials)).then((data) => data.json());
-}
 
 export default function Login({ setToken }) {
   const passwordERef = useRef();
@@ -52,12 +34,14 @@ export default function Login({ setToken }) {
       return;
     }
     e.preventDefault();
-    const { data } = await loginUser({
+    const {data} = await API.post('authentication', JSON.stringify({
       email: username,
       password,
-    });
-    if (data.message == "success") {
-      setToken(data);
+    }));
+    // const data = data1.data;
+    console.log(data);
+    if (data.data.message == "success") {
+      setToken(data.data);
     } else {
       setIsValidated(false);
     }
@@ -71,12 +55,14 @@ export default function Login({ setToken }) {
       setFirstPwsEmpty(true);
       return;
     }
-    const { data } = await loginUser({
+    const {data} = await API.post('authentication', JSON.stringify({
       email: username,
       password,
-    });
-    if (data.message == "success") {
-      setToken(data);
+    }));
+    // const data = data1.data;
+    console.log(data);
+    if (data.data.message == "success") {
+      setToken(data.data);
     } else {
       setIsValidated(false);
     }
