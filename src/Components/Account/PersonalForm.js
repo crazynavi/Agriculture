@@ -6,6 +6,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AiOutlineMinus } from "react-icons/ai";
+import http from '../../utils/http-common';
+
 const style = {
   appearance: "none",
   backgroundColor: "#EDF1F4",
@@ -19,24 +21,12 @@ const optionStyle = {
 };
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const OCCUPATION_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^[a-zA-Z0-9!@#$%]{6,20}$/;
-// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 // const PHONE_NUMBER_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 const PHONE_NUMBER_REGEX = /^[0-9]{11,13}$/;
 
 const PersonalForm = (props) => {
-  const { updateState, currentTab } = props;
-  useEffect(() => {
-    console.log(updateState);
-    console.log(currentTab);
-    if(currentTab==="personal", updateState!==0){
-      alert("hello world");
-    }
-  }, [updateState])
 
-
-  
   const userRef = useRef();
   const errRef = useRef();
 
@@ -64,22 +54,57 @@ const PersonalForm = (props) => {
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [validPhoneNumber, setValidPhoneNumber] = useState(false);
   const [phoneNumberFocus, setPhoneNumberFocus] = useState(false);
 
-  const [password, setPassword] = useState("");
-
-  const [pwd, setpwd] = useState("");
-  const [validPwd, setValidPwd] = useState(false);
-  const [pwdFocus, setPwdFocus] = useState(false);
-
-  const [matchPwd, setmatchPwd] = useState("");
-  const [validMatch, setValidMatch] = useState(false);
-  const [matchFocus, setMatchFocus] = useState(false);
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const { updateState, currentTab } = props;
+
+  const launch_toast = () => {
+    let xxx = document.getElementsByClassName("error_toast");
+    let x = xxx[0];
+    x.className = "error_toast show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+  }
+  const launch_toast2 = () => {
+    let xxx = document.getElementsByClassName("success_toast");
+    let x = xxx[0];
+    x.className = "success_toast show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+  }
+  useEffect(() => {
+    console.log(updateState);
+    console.log(currentTab);
+    let validated = validEmail && validFirstName && validLastName && validOccupation && validPhoneNumber;
+    if (currentTab === "personal", updateState !== 0) {
+      if (validated) {
+        launch_toast2();
+      } else {
+        launch_toast();
+      }
+    }
+  }, [updateState])
+
+  useEffect(() => {
+    http.get("account").then((res) => {
+      const data = res.data.data;
+      console.log(data);
+      setFirstName(data.first_name);
+      setLasttName(data.last_name);
+      setEmail(data.email);
+      setCompany(data.company);
+      setOccupation(data.occupation);
+      setCity(data.city);
+      setUserstate(data.state);
+      setPostal(data.zip);
+      setPhoneNumber(data.phone);
+      setCountry(data.country);
+    });
+  }, []);
+
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -96,7 +121,7 @@ const PersonalForm = (props) => {
   }, [email]);
 
   useEffect(() => {
-    setValidPhoneNumber(PHONE_NUMBER_REGEX.test(phoneNumber));
+    setValidPhoneNumber(PHONE_NUMBER_REGEX.test(Number(phoneNumber)));
     // switch (phoneNumber.length) {
     // 	case 3: case 7: setPhoneNumber((phoneNumber) => phoneNumber + '-');
     // }
@@ -107,18 +132,31 @@ const PersonalForm = (props) => {
   }, [occupation]);
 
   useEffect(() => {
-    setValidPwd(PWD_REGEX.test(pwd));
-    setValidMatch(pwd === matchPwd);
-  }, [pwd, matchPwd]);
-
-  useEffect(() => {
     setErrMsg("");
-  }, [email, phoneNumber, pwd, matchPwd]);
-
+  }, [email, phoneNumber]);
+  // useEffect(()=>{
+  //   if(validEmail&&validFirstName&&validLastName&&validOccupation&&validPhoneNumber){
+  //     setValid(true);
+  //   }else{
+  //     setValid(false);
+  //   }
+  // },[validEmail,validFirstName,validLastName,validOccupation,validPhoneNumber]);
   return (
     <>
       <div className="box-container mt-4">
         <h1 className="text-center">USER INFORMATION</h1>
+        <div id="toast" className="error_toast">
+          <div id="img" className="bg-info">
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
+          <div id="desc">You have to complete all the fields...</div>
+        </div>
+        <div id="toast_success" className="success_toast">
+          <div id="img" className="bg-info">
+            <FontAwesomeIcon icon={faCheck} />
+          </div>
+          <div id="desc">Updated Successfully</div>
+        </div>
         <div className="form-group mt-4 mb-4">
           <div className="form-items">
             <label htmlFor="username">
@@ -305,7 +343,7 @@ const PersonalForm = (props) => {
               }}
             />
           </div>
-          <div className="form-items w-xs">
+          <div className="form-items w-small">
             <label>State:</label>
             <input
               name={"state"}
@@ -395,86 +433,6 @@ const PersonalForm = (props) => {
             >
               <FontAwesomeIcon icon={faInfoCircle} />
               Invalid email
-            </p>
-          </div>
-
-          <div className="form-items w-equal-width">
-            <label>
-              <span className="required-icon">* </span>Current Password
-            </label>
-            <input
-              name={"password"}
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              type={"password"}
-            />
-          </div>
-          <div className="form-items w-equal-width">
-            <label htmlFor="password">
-              <span className="required-icon">* </span>
-              New Password
-              <FontAwesomeIcon
-                icon={faCheck}
-                className={validPwd ? "valid" : "hide"}
-              />
-              <FontAwesomeIcon
-                icon={faTimes}
-                className={validPwd || !pwd ? "hide" : "invalid"}
-              />
-            </label>
-            <input
-              name={"pwd"}
-              type="password"
-              id="password"
-              onChange={(e) => setpwd(e.target.value)}
-              value={pwd}
-              aria-invalid={validPwd ? "false" : "true"}
-              aria-describedby="pwdnote"
-              onFocus={() => setPwdFocus(true)}
-              onBlur={() => setPwdFocus(false)}
-            />
-            <p
-              id="pwdnote"
-              className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              password is at least 6 letters
-            </p>
-          </div>
-          <div className="form-items w-equal-width">
-            <label htmlFor="confirm_pwd">
-              <span className="required-icon">* </span>
-              Confirm Password
-              <FontAwesomeIcon
-                icon={faCheck}
-                className={validMatch && matchPwd ? "valid" : "hide"}
-              />
-              <FontAwesomeIcon
-                icon={faTimes}
-                className={validMatch || !matchPwd ? "hide" : "invalid"}
-              />
-            </label>
-            <input
-              type="password"
-              name={"confrim_pwd"}
-              id="confirm_pwd"
-              onChange={(e) => setmatchPwd(e.target.value)}
-              value={matchPwd}
-              aria-invalid={validMatch ? "false" : "true"}
-              aria-describedby="confirmnote"
-              onFocus={() => setMatchFocus(true)}
-              onBlur={() => setMatchFocus(false)}
-            />
-            <p
-              id="confirmnote"
-              className={
-                matchFocus && !validMatch ? "instructions" : "offscreen"
-              }
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              Must match the new password field.
             </p>
           </div>
         </div>

@@ -65,6 +65,18 @@ const SideNav = () => {
             <RiErrorWarningLine />
             <span className="ms-2">PRIVACY POLICY</span>
           </NavLink>
+          <p
+            className="nav-item bg-black"
+            // style={{fontSize:"1rem"}}
+              onClick={() => {
+                localStorage.removeItem("tokenData");
+                localStorage.removeItem("timestamp");
+                redirectToHome();
+              }}
+            > 
+               <FontAwesomeIcon icon={faRightFromBracket}/>
+               <span className="ms-2">  Sign out</span>
+            </p>
         </div>
       </div>
       <div className="w-100">
@@ -82,21 +94,12 @@ const SideNav = () => {
               alt=""
             />
           </div>
-          <div className='flex-grow-1'>
+          <div>
             <div className="d-flex" style={{justifyContent :"space-around"}}>
             <h4>{(JSON.parse(localStorage.getItem("tokenData")).user_data.user_name).replace(/^./, str => str.toUpperCase())}</h4>
-            <button
-            style={{fontSize:"1rem"}}
-              onClick={() => {
-                localStorage.removeItem("tokenData");
-                redirectToHome();
-              }}
-            > 
-               <FontAwesomeIcon icon={faRightFromBracket} />
-               <span>  Sign out</span>
-            </button>
+
             </div>
-            <h3>{`${JSON.parse(localStorage.getItem("tokenData")).user_data.first_name??""} ${JSON.parse(localStorage.getItem("tokenData")).user_data.last_name??""}`}</h3>
+            <h3 className="text-center">{`${JSON.parse(localStorage.getItem("tokenData")).user_data.first_name??""} ${JSON.parse(localStorage.getItem("tokenData")).user_data.last_name??""}`}</h3>
           </div>
         </div>
       </div>
