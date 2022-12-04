@@ -83,7 +83,15 @@ const PersonalForm = (props) => {
     let validated = validEmail && validFirstName && validLastName && validOccupation && validPhoneNumber;
     if (currentTab === "personal", updateState !== 0) {
       if (validated) {
-        launch_toast2();
+        http.post("account/update", { first_name: firstName, last_name: lastName, email: email, phone: phoneNumber, country: country, city: city, state: userstate, zip: postal, occupation: occupation, company: company })
+          .then((res) => {
+            launch_toast2();
+          })
+          .catch(
+            (err) => {
+              console.log(err);
+            });
+
       } else {
         launch_toast();
       }
