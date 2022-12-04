@@ -7,6 +7,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AiOutlineMinus } from "react-icons/ai";
 import http from '../../utils/http-common';
+import PhoneInput from "react-phone-input-2";
+import 'react-phone-input-2/lib/style.css'
 
 const style = {
   appearance: "none",
@@ -23,7 +25,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const OCCUPATION_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 // const PHONE_NUMBER_REGEX = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
-const PHONE_NUMBER_REGEX = /^[0-9]{11,13}$/;
+const PHONE_NUMBER_REGEX = /^[0-9]{10,13}$/;
 
 const PersonalForm = (props) => {
 
@@ -380,6 +382,17 @@ const PersonalForm = (props) => {
                 }
               />
             </label>
+            {/* <PhoneInput
+              name="phone_number"
+              id="phone"
+              country={'us'}
+              value={phoneNumber}
+              onChange={phone => setPhoneNumber({ phone })}
+              aria-invalid={phoneNumber ? "false" : "true"}
+              aria-describedby="uidnote"
+              onFocus={() => setPhoneNumberFocus(true)}
+              onBlur={() => setPhoneNumberFocus(false)}
+            /> */}
             <input
               type="text"
               name="phone_number"

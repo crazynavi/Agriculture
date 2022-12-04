@@ -22,7 +22,6 @@ const Dashboard = () => {
         </div>
         <div className='dashboard-weather'>
           <AdsBanner />
-          {/* <WeatherCard /> */}
         </div>
       </div>
     </>

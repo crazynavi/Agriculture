@@ -39,9 +39,12 @@ const PasswordForm = (props) => {
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
-  const [errMsg, setErrMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("You have to complete all the fields...");
+
   const [success, setSuccess] = useState(false);
-  const launch_toast = () => {
+
+  const launch_toast = (errMsg) => {
+    setErrMsg(errMsg);
     let xxx = document.getElementsByClassName("error_toast");
     let x = xxx[0];
     x.className = "error_toast show";
@@ -58,9 +61,17 @@ const PasswordForm = (props) => {
     let validated = validPwd && validMatch && password != "";
     if (currentTab === "password", updateState !== 0) {
       if (validated) {
-        launch_toast2();
+        http.post("account/password/update", { current_password: password, new_password: pwd, confirm_password: matchPwd })
+          .then((res) => {
+            launch_toast2();
+          })
+          .catch(
+            (err) => {
+              if (err.response.data.data.message === "incorrect current password") { launch_toast(err.response.data.data.message) }
+              else { launch_toast("server in not connected") }
+            });
       } else {
-        launch_toast();
+        launch_toast("You have to complete all the fields...");
       }
     }
   }, [updateState])
@@ -84,7 +95,7 @@ const PasswordForm = (props) => {
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faTimes} />
           </div>
-          <div id="desc">You have to complete all the fields...</div>
+          <div id="desc">{errMsg}</div>
         </div>
         <div id="toast_success" className="success_toast">
           <div id="img" className="bg-info">
@@ -99,11 +110,11 @@ const PasswordForm = (props) => {
               Current
               <FontAwesomeIcon
                 icon={faCheck}
-                className={password !=="" ? "valid" : "hide"}
+                className={password !== "" ? "valid" : "hide"}
               />
               <FontAwesomeIcon
                 icon={faTimes}
-                className={password !==""  || !password ? "hide" : "invalid"}
+                className={password !== "" || !password ? "hide" : "invalid"}
               />
             </label>
             <input
@@ -113,15 +124,8 @@ const PasswordForm = (props) => {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              type={"password"}
+              type={"text"}
             />
-            <p
-              id="pwd"
-              className={pwdFocus && password !=="" ? "instructions" : "offscreen"}
-            >
-              <FontAwesomeIcon icon={faInfoCircle} />
-              input current  password
-            </p>
           </div>
           <div className="form-items">
             <label htmlFor="password">
