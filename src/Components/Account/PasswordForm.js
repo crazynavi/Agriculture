@@ -23,9 +23,6 @@ const PWD_REGEX = /^[a-zA-Z0-9!@#$%]{6,20}$/;
 // const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const PasswordForm = (props) => {
 
-
-
-
   const userRef = useRef();
   const errRef = useRef();
 
@@ -142,7 +139,7 @@ const PasswordForm = (props) => {
             </label>
             <input
               name={"pwd"}
-              type="password"
+              type="text"
               id="password"
               onChange={(e) => setpwd(e.target.value)}
               value={pwd}
@@ -173,7 +170,7 @@ const PasswordForm = (props) => {
               />
             </label>
             <input
-              type="password"
+              type="text"
               name={"confrim_pwd"}
               id="confirm_pwd"
               onChange={(e) => setmatchPwd(e.target.value)}

@@ -101,7 +101,7 @@ const PersonalForm = (props) => {
   useEffect(() => {
     http.get("account").then((res) => {
       const data = res.data.data;
-      console.log(data);
+      console.log(res);
       setFirstName(data.first_name);
       setLasttName(data.last_name);
       setEmail(data.email);
