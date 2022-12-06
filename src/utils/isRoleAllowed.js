@@ -1,6 +1,6 @@
 export const isRoleAllowed = (list) => {
-  const role = JSON.parse(localStorage.getItem("tokenData")).user_level;
-    // let role = [2656,2658,2669,2771,2663,2666,2635,2644,2650,2652,2734];
+  // const role = JSON.parse(localStorage.getItem("tokenData")).user_level;
+    let role = [2656,2658,2669,2771,2663,2666,2635,2644,2650,2652,2734];
     // let role = [2656,2666,2635,2644,2734];
   let isAllowed = false;
   role.forEach((element) => {
