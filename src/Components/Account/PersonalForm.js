@@ -48,8 +48,11 @@ const PersonalForm = (props) => {
 
   // const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
+  
   const [city, setCity] = useState("");
+
   const [userstate, setUserstate] = useState("");
+
   const [postal, setPostal] = useState("");
 
   const [email, setEmail] = useState("");
@@ -64,6 +67,8 @@ const PersonalForm = (props) => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const { updateState, currentTab } = props;
+
+  const [devices, setDevices] = useState([]);
 
   const launch_toast = () => {
     let xxx = document.getElementsByClassName("error_toast");
@@ -83,7 +88,7 @@ const PersonalForm = (props) => {
     let validated = validEmail && validFirstName && validLastName && validOccupation && validPhoneNumber;
     if (currentTab === "personal", updateState !== 0) {
       if (validated) {
-        http.post("account/update", { first_name: firstName, last_name: lastName, email: email, phone: phoneNumber, country: country, city: city, state: userstate, zip: postal, occupation: occupation, company: company })
+        http.post("account/update", { first_name: firstName, last_name: lastName, email: email, phone: phoneNumber, country: country, city: city, state: userstate, postal: postal, occupation: occupation, company: company })
           .then((res) => {
             launch_toast2();
           })
@@ -101,7 +106,6 @@ const PersonalForm = (props) => {
   useEffect(() => {
     http.get("account").then((res) => {
       const data = res.data.data;
-      console.log(res);
       setFirstName(data.first_name);
       setLasttName(data.last_name);
       setEmail(data.email);
@@ -113,6 +117,14 @@ const PersonalForm = (props) => {
       setPhoneNumber(data.phone);
       setCountry(data.country);
     });
+  }, []);
+
+  useEffect(() => {
+    http.get("get_device_infos").then((res) => {
+      setDevices(res.data.data);
+    }).catch((err) => {
+      console.log(err);
+    })
   }, []);
 
   useEffect(() => {

@@ -13,29 +13,29 @@ const BusinessForm = () => {
     const [firstName, setFirstName] = useState("");
     const [validFirstName, setValidFirstName] = useState(false);
     const [firstNameFocus, setFirstNameFocus] = useState(false);
-    
+
     const [lastName, setLasttName] = useState("");
     const [validLastName, setValidLastName] = useState(false);
     const [lastNameFocus, setlastNameFocus] = useState(false);
-    
+
     const [email, setEmail] = useState("");
     const [validEmail, setValidEmail] = useState(false);
     const [emailFocus, setEmailFocus] = useState(false);
 
-    const addUser = () =>{
+    const addUser = () => {
         let x = document.getElementById("addUser");
         x.className = "";
     }
 
-    const handleCancel = () =>{
+    const handleCancel = () => {
         setFirstName("");
         setLasttName("");
         setEmail("");
-        let x= document.getElementById("addUser");
+        let x = document.getElementById("addUser");
         x.className = "hide";
     }
-    const handleConfirm = () =>{
-        let x= document.getElementById("addUser");
+    const handleConfirm = () => {
+        let x = document.getElementById("addUser");
         x.className = "hide";
         alert("success");
     }
@@ -52,7 +52,7 @@ const BusinessForm = () => {
     return (
         <>
             <div className='box-container mt-4'>
-                <div className='add-newsletter-btn' onClick={()=>{addUser()}}><span><AiOutlinePlus /></span></div>
+                <div className='add-newsletter-btn' onClick={() => { addUser() }}><span><AiOutlinePlus /></span></div>
                 <div id="addUser" className="hide">
                     <div className="form-group mt-4 mb-4">
                         <div className="form-items">
@@ -158,9 +158,9 @@ const BusinessForm = () => {
                                 Invalid email
                             </p>
                         </div>
-                        <div className="btn-group d-flex w-100" style={{justifyContent:"space-around"}}>
-                                <button onClick={()=>handleConfirm()} className="success-btn">Confirm</button>
-                                <button onClick={()=>{handleCancel()}} className="cancel-btn">Cancel</button>
+                        <div className="btn-group d-flex w-100" style={{ justifyContent: "space-around" }}>
+                            <button onClick={() => handleConfirm()} className="success-btn">Confirm</button>
+                            <button onClick={() => { handleCancel() }} className="cancel-btn">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -168,10 +168,12 @@ const BusinessForm = () => {
                     <h1 className='text-center'>USER INFORMATION - DAILY NEWSLETTER</h1>
                     <table className='mt-4'>
                         <thead>
-                            <th></th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email Address</th>
+                            <tr>
+                                <th></th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email Address</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>

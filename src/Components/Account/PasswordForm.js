@@ -5,7 +5,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AiOutlineMinus } from "react-icons/ai";
+
 import http from '../../utils/http-common';
 
 const style = {
@@ -116,6 +116,7 @@ const PasswordForm = (props) => {
             </label>
             <input
               name={"password"}
+              autoComplete={"off"}
               ref={userRef}
               value={password}
               onChange={(e) => {
@@ -139,8 +140,9 @@ const PasswordForm = (props) => {
             </label>
             <input
               name={"pwd"}
-              type="text"
+              type="password"
               id="password"
+              autoComplete={"off"}
               onChange={(e) => setpwd(e.target.value)}
               value={pwd}
               aria-invalid={validPwd ? "false" : "true"}
@@ -170,7 +172,7 @@ const PasswordForm = (props) => {
               />
             </label>
             <input
-              type="text"
+              type="password"
               name={"confrim_pwd"}
               id="confirm_pwd"
               onChange={(e) => setmatchPwd(e.target.value)}

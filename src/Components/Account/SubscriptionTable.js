@@ -5,20 +5,22 @@ import Sub3 from '../../assets/subscription-3.png'
 import Sub4 from '../../assets/subscription-4.png'
 import Sub5 from '../../assets/subscription-5.png'
 
-const SubscriptionTable = ({setShowModal1}) => {
+const SubscriptionTable = ({ setShowModal1 }) => {
     return (
         <>
             <div className='box-container subscription mt-4'>
                 <table className='subscription-table mt-5'>
                     <thead>
-                        <th></th>
-                        <th>Subscription Type </th>
-                        <th>Status</th>
-                        <th>Start</th>
-                        <th>Period Start</th>
-                        <th>Period End</th>
-                        <th>Users</th>
-                        <th></th>
+                        <tr>
+                            <th></th>
+                            <th>Subscription Type </th>
+                            <th>Status</th>
+                            <th>Start</th>
+                            <th>Period Start</th>
+                            <th>Period End</th>
+                            <th>Users</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
                         <tr>
