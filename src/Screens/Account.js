@@ -27,7 +27,7 @@ const Account = () => {
     <>
       <div className='top-tabs'>
         <div onClick={() => {setTab('personal');setUpdateState(0)}} className={tab === 'personal' ? 'active': ''}>PERSONAL</div>
-        <div onClick={() => {setTab('password');setUpdateState(0)}} className={tab === 'password' ? 'active': ''}>Password</div>
+        <div onClick={() => {setTab('password');setUpdateState(0)}} className={tab === 'password' ? 'active': ''}>PASSWORD</div>
         <div onClick={() => setTab('business')} className={tab === 'business' ? 'active': ''}>BUSINESS</div>
         <div onClick={() => setTab('subscriptions')} className={tab === 'subscriptions' ? 'active': ''}>SUBSCRIPTIONS</div>
         <div onClick={() => setTab('payment')} className={tab === 'payment' ? 'active': ''}>PAYMENT</div>

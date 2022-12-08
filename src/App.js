@@ -52,22 +52,22 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             {/* <Route path="/my-account" element={<Account />} /> */}
-            <Route element={<ProtectedRoute role={[2734]} />}>
+            <Route element={<ProtectedRoute role={[119125]} />}>
               <Route path="/my-account" element={<Account />} />
             </Route>
-            <Route element={<ProtectedRoute role={[2656, 2658]} />}>
+            <Route element={<ProtectedRoute role={[632, 631, 628]} />}>
               <Route path="/report-daily" element={<ReportDaily />} />
             </Route>
-            <Route element={<ProtectedRoute role={[2669, 2671]} />}>
+            <Route element={<ProtectedRoute role={[636, 637,638]} />}>
               <Route path="/report-weekly" element={<ReportWeekly />} />
             </Route>
-            <Route element={<ProtectedRoute role={[2663, 2666]} />}>
+            <Route element={<ProtectedRoute role={[639,640,641]} />}>
               <Route path="/report-plus" element={<ReportPlus />} />
             </Route>
-            <Route element={<ProtectedRoute role={[2635, 2644]} />}>
+            <Route element={<ProtectedRoute role={[642,643,644]} />}>
               <Route path="/report-latam" element={<ReportLatam />} />
             </Route>
-            <Route element={<ProtectedRoute role={[2650, 2652]} />}>
+            <Route element={<ProtectedRoute role={[645,646,647]} />}>
               <Route path="/report-climate" element={<ReportClimate />} />
             </Route>
             <Route path="/privacy" element={<Privacy />} />
