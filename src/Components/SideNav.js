@@ -38,24 +38,24 @@ const SideNav = () => {
           </div>
           {isMenuOpen && (
             <div className="sub-menu">
-              {isRoleAllowed([2656, 2658]) && (
+              {isRoleAllowed([632, 631, 628]) && (
                 <NavLink to={"/report-daily"}>Daily Newsletter</NavLink>
               )}
-              {isRoleAllowed([2669, 2671]) && (
+              {isRoleAllowed([636, 637,638]) && (
                 <NavLink to={"/report-weekly"}>Weekly Newsletter</NavLink>
               )}
-              {isRoleAllowed([2663, 2666]) && (
+              {isRoleAllowed([639,640,641]) && (
                 <NavLink to={"/report-plus"}>Plus+ Report</NavLink>
               )}
-              {isRoleAllowed([2635, 2644]) && (
+              {isRoleAllowed([642,643,644]) && (
                 <NavLink to={"/report-latam"}>LATAM Newsletter</NavLink>
               )}
-              {isRoleAllowed([2650, 2652]) && (
+              {isRoleAllowed([645,646,647]) && (
                 <NavLink to={"/report-climate"}>Climate Impact</NavLink>
               )}
             </div>
           )}
-          {isRoleAllowed([2734]) && (
+          {isRoleAllowed([119125]) && (
             <NavLink className="nav-item" to={"/my-account"}>
               <BsCreditCard2Front />
               <span className="ms-2">MY ACCOUNT</span>
