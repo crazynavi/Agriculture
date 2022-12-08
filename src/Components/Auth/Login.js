@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import logo from "../../assets/US-Logo.png";
 import Button from "./Button";
 import FluidInput from "./FluidInput";
-import http from '../../utils/http-common';
-
-
+import http from "../../utils/http-common";
 
 export default function Login({ setToken }) {
   const passwordERef = useRef();
@@ -16,6 +14,7 @@ export default function Login({ setToken }) {
   const [isPassEmpty, setIsPassEmpty] = useState(true);
   const [firstEmpty, setFirstEmpty] = useState(false);
   const [firstPwsEmpty, setFirstPwsEmpty] = useState(false);
+  const [loading, setLoading] = useState(false);
   const setFiled = (filedName, fieldValue) => {
     if (filedName === "username") setUserName(fieldValue);
     else setPassword(fieldValue);
@@ -24,6 +23,7 @@ export default function Login({ setToken }) {
     margin: "15px 0",
   };
   const handleSubmit = (e) => {
+    setLoading(true);
     if (isEmpty || isPassEmpty) {
       if (isEmpty) {
         setFirstEmpty(true);
@@ -34,14 +34,27 @@ export default function Login({ setToken }) {
       return;
     }
     e.preventDefault();
-    http.post('authentication', JSON.stringify({
-      email: username,
-      password,
-    }))
-      .then((res) => { if (res.data.data.message == "success") { setToken(res.data.data) } })
-      .catch((err) => { setIsValidated(false) });
+    http
+      .post(
+        "authentication",
+        JSON.stringify({
+          email: username,
+          password,
+        })
+      )
+      .then((res) => {
+        setLoading(false);
+        if (res.data.data.message == "success") {
+          setToken(res.data.data);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        setIsValidated(false);
+      });
   };
   const handleSubmit2 = async () => {
+    setLoading(true);
     if (isEmpty) {
       setFirstEmpty(true);
       return;
@@ -50,12 +63,24 @@ export default function Login({ setToken }) {
       setFirstPwsEmpty(true);
       return;
     }
-    http.post('authentication', JSON.stringify({
-      email: username,
-      password,
-    }))
-      .then((res) => { if (res.data.data.message == "success") { setToken(res.data.data) } })
-      .catch((err) => { setIsValidated(false) });
+    http
+      .post(
+        "authentication",
+        JSON.stringify({
+          email: username,
+          password,
+        })
+      )
+      .then((res) => {
+        setLoading(false);
+        if (res.data.data.message == "success") {
+          setToken(res.data.data);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        setIsValidated(false);
+      });
   };
 
   return (
@@ -106,6 +131,7 @@ export default function Login({ setToken }) {
         </div>
       )}
       <Button
+        disabled={loading}
         buttonText="log in"
         buttonClass="login-button"
         onClick={handleSubmit}

@@ -33,6 +33,11 @@
     text-align: center;
 }
 
+.disabled{
+    pointer-events: none;
+    opacity: 0.65;
+}
+
 .mt-2 {
     margin-top: .5rem;
 }
