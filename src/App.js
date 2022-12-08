@@ -18,30 +18,26 @@ import { useEffect } from "react";
 
 function App() {
   const { token, setToken } = useToken();
-  // useEffect(() => {
-  //   if (localStorage.getItem("tokenData")) {
-  //     const userRole = JSON.parse(localStorage.getItem("tokenData")).user_role;
-  //   }
-  // }, [token]);
-  useEffect(() => {
-    const TIMESTAMP = Date.now();
-    if (token) {
-      if (!JSON.parse(localStorage.getItem("timestamp"))) {
-        localStorage.setItem("timestamp", JSON.stringify({
-          initial: TIMESTAMP,
-          expiresOn: TIMESTAMP + 1000 * 60 * 60 //1hour
-        }));
-      } else {
-        // then, when user access the website again, check the expiresOn, it it's value is bigger than current date
-        const EXPIRE_DATE = JSON.parse(localStorage.getItem("timestamp")).expiresOn;
 
-        if (Date.now() > EXPIRE_DATE) {
-          localStorage.removeItem("tokenData");
-          localStorage.removeItem("timestamp");
-          window.location.href = "";
-        }
-      }
-    }
+  useEffect(() => {
+    // const TIMESTAMP = Date.now();
+    // if (token) {
+    //   if (!JSON.parse(localStorage.getItem("timestamp"))) {
+    //     localStorage.setItem("timestamp", JSON.stringify({
+    //       initial: TIMESTAMP,
+    //       expiresOn: TIMESTAMP + 1000 * 60 * 15 //15min
+    //     }));
+    //   } else {
+    //     // then, when user access the website again, check the expiresOn, it it's value is bigger than current date
+    //     const EXPIRE_DATE = JSON.parse(localStorage.getItem("timestamp")).expiresOn;
+
+    //     if (Date.now() > EXPIRE_DATE) {
+    //       localStorage.removeItem("tokenData");
+    //       localStorage.removeItem("timestamp");
+    //       window.location.href = "";
+    //     }
+    //   }
+    // }
   })
 
   if (!token) {

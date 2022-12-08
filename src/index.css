@@ -4,6 +4,8 @@
     margin: 0;
     padding: 0;
     font-family: 'Barlow', sans-serif;
+    box-sizing: border-box !important;
+    
 }
 
 
@@ -91,6 +93,22 @@
     padding: 0 !important;
 }
 
+.p-4 {
+    padding: 2rem !important
+}
+.p-2 {
+    padding: 1rem !important
+}
+
+.px-6 {
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+}
+
+.p-3{
+    padding: 1.5rem !important
+}
+
 .pt-2 {
     padding-top: 1rem !important;
 }
@@ -122,6 +140,10 @@
 
 .d-flex {
     display: flex !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
 }
 
 .flex-grow-1{
@@ -516,6 +538,7 @@
     cursor: pointer;
 }
 
+
 .form-group {
     display: flex;
     flex-wrap: wrap;
@@ -548,6 +571,10 @@
     width: 35% !important;
 }
 
+.w-50 {
+    width: 50% !important;
+}
+
 .w-equal-width {
     width: 31% !important;
 }
@@ -565,7 +592,7 @@
 }
 
 .devices-section>div {
-    width: 45%;
+    width: 50%;
     font-weight: 600;
     font-size: 24px;
 }

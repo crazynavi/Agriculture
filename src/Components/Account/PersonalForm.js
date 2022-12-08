@@ -48,7 +48,7 @@ const PersonalForm = (props) => {
 
   // const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
-  
+
   const [city, setCity] = useState("");
 
   const [userstate, setUserstate] = useState("");
@@ -88,7 +88,7 @@ const PersonalForm = (props) => {
     let validated = validEmail && validFirstName && validLastName && validOccupation && validPhoneNumber;
     if (currentTab === "personal", updateState !== 0) {
       if (validated) {
-        http.post("account/update", { first_name: firstName, last_name: lastName, email: email, phone: phoneNumber, country: country, city: city, state: userstate, postal: postal, occupation: occupation, company: company })
+        http.post("account/update", { first_name: firstName, last_name: lastName, email: email, phone: phoneNumber, country: country, city: city, state: userstate, zip: postal, occupation: occupation, company: company })
           .then((res) => {
             launch_toast2();
           })
@@ -122,6 +122,7 @@ const PersonalForm = (props) => {
   useEffect(() => {
     http.get("get_device_infos").then((res) => {
       setDevices(res.data.data);
+      console.log(res.data.data);
     }).catch((err) => {
       console.log(err);
     })
@@ -156,6 +157,22 @@ const PersonalForm = (props) => {
   useEffect(() => {
     setErrMsg("");
   }, [email, phoneNumber]);
+
+  const cancelDevice = (device) =>{
+    let key = device.meta_key[8];
+    http.post("remove_device_info", {device_id:key})
+    .then((res) => {
+      console.log(res);
+      let new_devices = devices.filter((dev)=>{
+        return dev != device
+      })
+      setDevices(new_devices);
+    })
+    .catch(
+      (err) => {
+        console.log(err);
+      });
+  }
   // useEffect(()=>{
   //   if(validEmail&&validFirstName&&validLastName&&validOccupation&&validPhoneNumber){
   //     setValid(true);
@@ -472,20 +489,17 @@ const PersonalForm = (props) => {
       </div>
       <div className="box-container mt-4">
         <h1 className="text-center">DEVICES</h1>
-        <div className="devices-section mt-3 mb-4 d-flex justify-content-between align-items-cener">
-          <div className="d-flex justify-content-between align-items-center">
-            <span>
-              <AiOutlineMinus />
-            </span>
-            <div>IOS Device Added:</div>
-            <div> 08/05/2022</div>
-          </div>
-          <div className="d-flex justify-content-between align-items-center">
-            <span>
-              <AiOutlineMinus />
-            </span>
-            <div>IOS Device Added:</div> <div>08/05/2022</div>
-          </div>
+        <div className="devices-section mt-3 mb-4 d-flex flex-wrap align-items-cener">
+          {devices.map((device, index)=>{
+            return(
+              <div key={index} className="d-flex p-2 justify-content-start align-items-center">
+              <span onClick={()=>{cancelDevice(device)}} className="me-2">
+                <AiOutlineMinus />
+              </span>
+              <div>{device.meta_value} Device Added</div>
+            </div>
+            );
+          })}
         </div>
       </div>
     </>
