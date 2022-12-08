@@ -23,7 +23,8 @@ useEffect(() => {
   return (
     <div className='weather-banner'>
         <a target='_blank' rel="noreferrer" href={banner.ads_link}>
-            <img src={banner.ads_background_image} alt='' />
+            {/* <img src={banner.ads_background_image} alt='' /> */}
+            <img src={""} alt='' />
         </a>
     </div>
   )
