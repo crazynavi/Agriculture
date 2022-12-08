@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import DashboardTable from '../Components/DashboardTable'
 import Updates from '../Components/Updates'
+import WeatherCard from '../Components/Weather/WeatherCard'
 import AdsBanner from '../Components/AdsBanner'
 import { AiOutlineConsoleSql } from 'react-icons/ai'
 import { userData } from '../utils/getTokendata'
@@ -21,6 +22,7 @@ const Dashboard = () => {
         </div>
         <div className='dashboard-weather'>
           <AdsBanner />
+          <WeatherCard />
         </div>
       </div>
     </>
