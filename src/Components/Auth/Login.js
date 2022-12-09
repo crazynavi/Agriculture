@@ -23,7 +23,6 @@ export default function Login({ setToken }) {
     margin: "15px 0",
   };
   const handleSubmit = (e) => {
-    setLoading(true);
     if (isEmpty || isPassEmpty) {
       if (isEmpty) {
         setFirstEmpty(true);
@@ -33,6 +32,7 @@ export default function Login({ setToken }) {
       }
       return;
     }
+    setLoading(true);
     e.preventDefault();
     http
       .post(
@@ -54,7 +54,6 @@ export default function Login({ setToken }) {
       });
   };
   const handleSubmit2 = async () => {
-    setLoading(true);
     if (isEmpty) {
       setFirstEmpty(true);
       return;
@@ -63,6 +62,7 @@ export default function Login({ setToken }) {
       setFirstPwsEmpty(true);
       return;
     }
+    setLoading(true);
     http
       .post(
         "authentication",
