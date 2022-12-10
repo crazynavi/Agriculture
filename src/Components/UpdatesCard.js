@@ -1,13 +1,14 @@
 import React from 'react'
+import Timestamp from 'react-timestamp'
 
-const UpdatesCard = ({image, text, timestamp}) => {
+const UpdatesCard = ({image, text, timestamp, onClick}) => {
     return (
-        <div className='updates-card'>
+        <div onClick={onClick} className='updates-card'>
             <img src={image} alt='' />
             <div className='updates-text'>
                 <div className="d-flex justify-content-between align-items-center">
-                    <p>{text}</p>
-                    <small>{timestamp}</small>
+                    <p className='update-title'>{text}</p>
+                    <small><Timestamp relative date={timestamp}/></small>
                 </div>
             </div>
         </div>

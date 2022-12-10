@@ -7565,6 +7565,11 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
+"react-timestamp@^6.0.0":
+  "integrity" "sha512-ZVyVuVp1MBWQGmcip3Nzb9n1uzAqkyGJgngiAa7WbQbWuw+IS3qlnYBoXThlHAt1Yby9eOuzMZse/jRQfq/LeQ=="
+  "resolved" "https://registry.npmjs.org/react-timestamp/-/react-timestamp-6.0.0.tgz"
+  "version" "6.0.0"
+
 "react@*", "react@^16.0 || ^17.0.0 || ^18.0.0", "react@^16.12.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.3", "react@>=16.8":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"

@@ -261,9 +261,17 @@
 }
 
 .updates-card {
+    cursor: pointer;
     position: relative;
     overflow: hidden;
     width: 18%;
+}
+
+.update-title{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .updates-card img {
