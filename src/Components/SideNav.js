@@ -95,7 +95,7 @@ const SideNav = () => {
             />
           </div>
           <div>
-            <div className="d-flex" style={{justifyContent :"space-around"}}>
+            <div className="d-flex">
             <h4>{(JSON.parse(localStorage.getItem("tokenData")).user_data.user_name).replace(/^./, str => str.toUpperCase())}</h4>
 
             </div>

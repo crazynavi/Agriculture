@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, forwardRef } from "react";
 
 const FluidInput = forwardRef((props, ref) => {
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState(true);
   const [value, setValue] = useState("");
   const [filedEmpty, setFiledEmpty] = useState(false);
   const [inputClass, setInputClass] = useState("fluid-input")
@@ -14,7 +14,7 @@ const FluidInput = forwardRef((props, ref) => {
     color : "red",
   }
   const focusField = () => {
-    setFocused(!focused);
+    setFocused(true);
   };
   const { type, label, style, id, setIsEmpty,field,firstEmpty, setFirstEmpty} = props;
 

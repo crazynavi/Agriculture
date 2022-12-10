@@ -186,7 +186,7 @@
 }
 
 .main-container>div:last-child {
-    width: calc(85% - 40px);
+    width: calc(85% + 40px);
     padding: 40px;
     padding-bottom: 0;
     background-color: #EEF1F4;
@@ -256,7 +256,7 @@
 .box-heading {
     font-weight: 500;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding-bottom: 5px;
+    padding-bottom: 8px;
     margin-bottom: 10px;
 }
 
@@ -318,12 +318,12 @@
 }
 
 .dashboard-tables .box-container {
-    width: calc(46% - 15px);
+    width: 49%;
     margin-top: 20px;
 }
 
 .dashboard-tables .box-heading {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
 .dashboard-tables table {
