@@ -15,10 +15,10 @@ const Dashboard = () => {
   const [title, setTitle] = useState("");
   const [subtitle, setSubtitle] = useState("");
   useEffect(() => {
-    if(detaildata.post_title){
-    setTitle((detaildata.post_title).split(";")[0]);
-    const subtitle1 = (detaildata.post_title).split(";")[1]?`${(detaildata.post_title).split(";")[1]};`:"";
-    const subtitle2 = (detaildata.post_title).split(";")[2]?(detaildata.post_title).split(";")[2]:"";
+    if(detaildata.title){
+    setTitle((detaildata.title).split(";")[0]);
+    const subtitle1 = (detaildata.title).split(";")[1]?`${(detaildata.title).split(";")[1]};`:"";
+    const subtitle2 = (detaildata.title).split(";")[2]?(detaildata.title).split(";")[2]:"";
     setSubtitle(subtitle1+subtitle2);
     }
   }, [detaildata]);
@@ -45,7 +45,7 @@ const Dashboard = () => {
       </div>
       <div className="reports-overflow">
         <div className="archive-date pt-4">
-          <h2>{title} <Timestamp date={detaildata.post_date}/> </h2>
+          <h2>{title} <Timestamp date={detaildata.date}/> </h2>
         </div>
         <div className="archive-image mt-2">
           <img src={banner} alt="" className="w-100" />
@@ -55,7 +55,7 @@ const Dashboard = () => {
             {subtitle}
           </h1>
         </div>
-        <div className="archive-text mt-3" dangerouslySetInnerHTML={{ __html: detaildata.post_content}} />
+        <div className="archive-text mt-3" dangerouslySetInnerHTML={{ __html: detaildata.content}} />
           {/* <h2>
             AgResource Farm Marketing Advice for Wednesday: 1/ No new advice.
           </h2>
