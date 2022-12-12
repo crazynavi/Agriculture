@@ -18,7 +18,7 @@ import { tokenData } from "./getTokendata";
 //     headers
 // })
 const instance = axios.create({
-    baseURL: `https://agresourcecom.bigscoots-staging.com/wp-json/ag/v1/`,
+    baseURL: `https://agresourcecom.bigscoots-staging.com/wp-json/arcmapi/v1/`,
     headers: {
         Accept: "application/json",
         "Content-type": "application/json"
