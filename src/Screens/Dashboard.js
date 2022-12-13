@@ -45,7 +45,7 @@ const Dashboard = () => {
       </div>
       <div className="reports-overflow">
         <div className="archive-date pt-4">
-          <h2>{title} <Timestamp date={detaildata.date}/> </h2>
+          <h2>{title} <Timestamp options={{showTime:0}} date={detaildata.published_at}/> </h2>
         </div>
         <div className="archive-image mt-2">
           <img src={banner} alt="" className="w-100" />

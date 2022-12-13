@@ -17,7 +17,6 @@ const WeatherCard = () => {
         setLoading(true);
         try{
             await axios.get(`https://geolocation-db.com/json/`).then(async(response) => {   
-
                 setLocationData(response.data);
                 await http.get(`get-weather?lat=${response.data.latitude}&lng=${response.data.longitude}`).then(res => {                            
                     setWeatherData(res.data);

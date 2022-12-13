@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import ReportsArchives from "../Components/Reports/ReportsArchives";
+import http from "../utils/http-common";
 
-export default function ReportClimate() {
+const ReportClimate = () => {
+  const [data, setData] = useState([]);
+  const subID = "2382";
+  useEffect(() => {
+    http.get("subscriptions/2382").then((res) => {
+      console.log(res.data.data);
+      setData(res.data.data.reports);
+    });
+  }, []);
   return (
-    <div>ReportClimate</div>
-  )
-}
+    <>
+      <ReportsArchives subdata={data} subID={subID}/>
+    </>
+  );
+};
+
+export default ReportClimate;

@@ -122,7 +122,6 @@ const PersonalForm = (props) => {
   useEffect(() => {
     http.get("get_device_infos").then((res) => {
       setDevices(res.data.data);
-      console.log(res.data.data);
     }).catch((err) => {
       console.log(err);
     })
@@ -162,7 +161,6 @@ const PersonalForm = (props) => {
     let key = device.meta_key[8];
     http.post("remove_device_info", {device_id:key})
     .then((res) => {
-      console.log(res);
       let new_devices = devices.filter((dev)=>{
         return dev != device
       })

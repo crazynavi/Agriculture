@@ -24,18 +24,17 @@ const Updates = (props) => {
             setPlus_recent(res.data.data["plus"]);
             setLatam_recent(res.data.data["agresource-latam"]);
             setImpact_recent(res.data.data["climate-newsletter"]);
-            console.log(res.data.data);
         })
     }, []);
     return (
         <div className='box-container'>
             <h2 className='box-heading'>Latest Updates</h2>
             <div className='d-flex updates justify-content-between align-items-center'>
-                <UpdatesCard onClick={()=>{onClick(daily_recent)}} image={daily_recent.image} text={daily_recent.title} timestamp={daily_recent.date} />
-                <UpdatesCard onClick={()=>{onClick(weekly_recent)}} image={weekly_recent.image} text={weekly_recent.title} timestamp={weekly_recent.date} />
-                <UpdatesCard onClick={()=>{onClick(plus_recent)}} image={plus_recent.image} text={plus_recent.title} timestamp={plus_recent.date} />
-                <UpdatesCard onClick={()=>{onClick(latam_recent)}} image={latam_recent.image} text={latam_recent.title} timestamp={latam_recent.date} />
-                <UpdatesCard onClick={()=>{onClick(impact_recent)}} image={impact_recent.image} text={impact_recent.title} timestamp={impact_recent.date} />
+                <UpdatesCard onClick={()=>{onClick(daily_recent)}} image={daily_recent.image} text={daily_recent.title} timestamp={daily_recent.published_at} />
+                <UpdatesCard onClick={()=>{onClick(weekly_recent)}} image={weekly_recent.image} text={weekly_recent.title} timestamp={weekly_recent.published_at} />
+                <UpdatesCard onClick={()=>{onClick(plus_recent)}} image={plus_recent.image} text={plus_recent.title} timestamp={plus_recent.published_at} />
+                <UpdatesCard onClick={()=>{onClick(latam_recent)}} image={latam_recent.image} text={latam_recent.title} timestamp={latam_recent.published_at} />
+                <UpdatesCard onClick={()=>{onClick(impact_recent)}} image={impact_recent.image} text={impact_recent.title} timestamp={impact_recent.published_at} />
             </div>
         </div>
     )
