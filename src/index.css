@@ -275,6 +275,7 @@
 }
 
 .updates-card img {
+    height: 6rem;
     width: 100%;
     border-radius: 10px;
 }
