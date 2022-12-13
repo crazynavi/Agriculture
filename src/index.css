@@ -489,6 +489,10 @@
     background-color: #026937;
     border-radius: 5px;
 }
+.sub-menu a:hover {
+    background-color: #026937;
+    border-radius: 5px;
+}
 
 .top-tabs {
     display: flex;

@@ -3,7 +3,6 @@ import { TiLocationArrow } from 'react-icons/ti';
 import WeatherImg from './WeatherImg';
 
 const CurrentWeather = (props) => {    
-
     //get wind direction
     const getWindDirection = (degree) => {
         let compassSector = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW", "N"];
