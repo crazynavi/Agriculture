@@ -182,7 +182,7 @@
 }
 
 .main-container>div:first-child {
-    width: calc(15% - 40px);
+    width: calc(20% - 40px);
 }
 
 .main-container>div:last-child {
@@ -265,6 +265,10 @@
     position: relative;
     overflow: hidden;
     width: 18%;
+    height: 6rem;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px;
 }
 
 .update-title{
@@ -274,11 +278,11 @@
     overflow: hidden;
 }
 
-.updates-card img {
+/* .updates-card img {
     height: 6rem;
     width: 100%;
     border-radius: 10px;
-}
+} */
 
 .updates-text {
     position: absolute;
@@ -779,7 +783,7 @@
     user-select: none;
     margin: 0;
     height: 51px;
-    width: 0;
+    /* width: 0; */
 }
 
 /* Hide the browser's default checkbox */

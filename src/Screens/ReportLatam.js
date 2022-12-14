@@ -7,6 +7,7 @@ const ReportLatam = () => {
   const subID = "2381";
   useEffect(() => {
     http.get("subscriptions/2381").then((res) => {
+      setData(res.data.data.reports);
     });
   }, []);
   return (

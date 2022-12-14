@@ -8,7 +8,6 @@ const ReportPlus = () => {
   useEffect(() => {
     http.get("subscriptions/2380").then((res) => {
       setData(res.data.data.reports);
-      console.log(res.data.data.reports);
     });
   }, []);
   return (
