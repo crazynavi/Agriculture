@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 import ReportsArchives from "../Components/Reports/ReportsArchives";
 import http from "../utils/http-common";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const ReportLatam = () => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const subID = "2381";
   useEffect(() => {
-    http.get("subscriptions/2381").then((res) => {
-      setData(res.data.data.reports);
-    });
+    setLoading(true);
+    http
+      .get("subscriptions/2381")
+      .then((res) => {
+        setData(res.data.data.reports);
+      })
+      .then(() => {
+        setLoading(false);
+      });
   }, []);
   return (
     <>
-      <ReportsArchives subdata={data} subID={subID}/>
+      {loading && <LoadingSpinner />}
+      {!loading && (
+        <>
+          <ReportsArchives subdata={data} subID={subID} />
+        </>
+      )}
     </>
   );
 };

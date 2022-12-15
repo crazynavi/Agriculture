@@ -1034,6 +1034,11 @@
     }
 }
 
+.spinner-container{
+    height: 90%;
+    align-items: center;
+}
+
 .loading-spinner {
     width: 30px;
     height: 30px;

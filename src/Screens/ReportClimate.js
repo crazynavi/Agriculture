@@ -1,19 +1,32 @@
 import React, { useEffect, useState } from "react";
 import ReportsArchives from "../Components/Reports/ReportsArchives";
 import http from "../utils/http-common";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const ReportClimate = () => {
   const [data, setData] = useState([]);
   const subID = "2382";
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    http.get("subscriptions/2382").then((res) => {
-      console.log(res.data.data);
-      setData(res.data.data.reports);
-    });
+    setLoading(true);
+    http
+      .get("subscriptions/2382")
+      .then((res) => {
+        console.log(res.data.data);
+        setData(res.data.data.reports);
+      })
+      .then(() => {
+        setLoading(false);
+      });
   }, []);
   return (
     <>
-      <ReportsArchives subdata={data} subID={subID}/>
+      {loading && <LoadingSpinner />}
+      {!loading && (
+        <>
+          <ReportsArchives subdata={data} subID={subID} />
+        </>
+      )}
     </>
   );
 };
