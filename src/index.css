@@ -457,7 +457,16 @@
 .sub-menu {
     margin-bottom: 10px;
 }
-
+.sub-menu .custom::before {
+    width: 1px;
+    height: 100%;
+    background: white;
+    top: -15px;
+    content: '';
+    left: 17px;
+    position: absolute;
+    z-index: 103;
+}
 .sub-menu a {
     display: block;
     padding-left: 45px;
@@ -479,7 +488,7 @@
     left: 18px;
 }
 
-.sub-menu a:after {
+/* .sub-menu a:after {
     width: 1px;
     height: 30px;
     background: white;
@@ -487,7 +496,7 @@
     content: '';
     left: 17px;
     position: absolute;
-}
+} */
 
 .sub-menu a.active {
     background-color: #026937;

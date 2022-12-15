@@ -37,7 +37,8 @@ const SideNav = () => {
             <AiFillCaretDown className="ms-2" />
           </div>
           {isMenuOpen && (
-            <div className="sub-menu">
+            <div className="sub-menu" style={{position: "relative"}}>
+              <div className="custom">
               {isRoleAllowed([632, 631, 628]) && (
                 <NavLink to={"/report-daily"}>Daily Newsletter</NavLink>
               )}
@@ -53,6 +54,7 @@ const SideNav = () => {
               {isRoleAllowed([645,646,647]) && (
                 <NavLink to={"/report-climate"}>Climate Impact</NavLink>
               )}
+              </div>
             </div>
           )}
           {isRoleAllowed([119125]) && (
