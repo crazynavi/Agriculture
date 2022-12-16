@@ -8,6 +8,8 @@ import Timestamp from 'react-timestamp'
 import base64 from 'base-64';
 import utf8 from 'utf8';
 
+import lang from '../../utils/Language'
+
 const ReportsArchives = ({subdata, subID, detailstatus}) => {
     const [showSingleAcrchive, setShowSingleArchive] = useState(false);
     const [ID, setID] = useState();
@@ -32,8 +34,11 @@ const ReportsArchives = ({subdata, subID, detailstatus}) => {
       }
       if(detaildata.content){
           const bytes = base64.decode(detaildata.content.replace(/\s/g, ''));
-          const text = utf8.decode(bytes);
-          setContent(text);
+        /* Old code */ 
+        //   const text = utf8.decode(bytes);
+        //   setContent(text);
+          const text = utf8.decode(bytes).match(/<body[^>]*>([^<]*(?:(?!<\/?body)<[^<]*)*)<\/body\s*>/i);
+          setContent(text[1]);
       }
     }, [detaildata]);
     useEffect(() => {
@@ -42,12 +47,11 @@ const ReportsArchives = ({subdata, subID, detailstatus}) => {
     return (
         <>
             {showSingleAcrchive ?
-
                 <div className='box-container mt-4'>
                     <div className='d-flex w-100 justify-content-between align-items-center'>
                         <div className='d-flex align-items-center go-back-btn' onClick={() => setShowSingleArchive(false)}>
                             <FcLeft />
-                            <h2 className='ms-2'>Archives</h2>
+                            <h2 className='ms-2'>{lang.reportArchives.back}</h2>
                         </div>
                         <div className='d-flex align-items-center'>
                             <div className='small-text d-flex align-items-center'>

@@ -6,6 +6,9 @@ import {
     faTimes,
     faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
+
+import lang from '../../utils/Language';
+
 const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
@@ -58,7 +61,7 @@ const BusinessForm = () => {
                         <div className="form-items">
                             <label htmlFor="username">
                                 <span className="required-icon">* </span>
-                                First Name
+                                {lang.myAccount.firstName}
                                 <FontAwesomeIcon
                                     icon={faCheck}
                                     className={validFirstName ? "valid" : "hide"}
@@ -87,13 +90,13 @@ const BusinessForm = () => {
                                 }
                             >
                                 <FontAwesomeIcon icon={faInfoCircle} />
-                                First name field should be at least 3 letters.
+                                {lang.myAccount.firstNameShouldBe}
                             </p>
                         </div>
                         <div className="form-items">
                             <label htmlFor="lastname">
                                 <span className="required-icon">* </span>
-                                Last Name
+                                {lang.myAccount.lastName}
                                 <FontAwesomeIcon
                                     icon={faCheck}
                                     className={validLastName ? "valid" : "hide"}
@@ -122,13 +125,13 @@ const BusinessForm = () => {
                                 }
                             >
                                 <FontAwesomeIcon icon={faInfoCircle} />
-                                Last name field should be at least 3 letters.
+                                {lang.myAccount.lastNameShouldBe}
                             </p>
                         </div>
                         <div className="form-items w-100">
                             <label htmlFor="email">
                                 <span className="required-icon">* </span>
-                                Email
+                                {lang.myAccount.email}
                                 <FontAwesomeIcon
                                     icon={faCheck}
                                     className={validEmail ? "valid" : "hide"}
@@ -155,7 +158,7 @@ const BusinessForm = () => {
                                 className={email && !validEmail ? "instructions" : "offscreen"}
                             >
                                 <FontAwesomeIcon icon={faInfoCircle} />
-                                Invalid email
+                                {lang.myAccount.validEmail}
                             </p>
                         </div>
                         <div className="btn-group d-flex w-100" style={{ justifyContent: "space-around" }}>
@@ -170,9 +173,9 @@ const BusinessForm = () => {
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email Address</th>
+                                <th>{lang.myAccount.firstName}</th>
+                                <th>{lang.myAccount.lastName}</th>
+                                <th>{lang.myAccount.email}</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import http from '../../utils/http-common';
+import lang from "../../utils/Language";
 
 const style = {
   appearance: "none",
@@ -87,7 +88,7 @@ const PasswordForm = (props) => {
   return (
     <>
       <div className="box-container mt-4">
-        <h1 className="text-center">PASSWORD INFORMATION</h1>
+        <h1 className="text-center">{lang.password.passwordInformation}</h1>
         <div id="toast" className="error_toast">
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faTimes} />
@@ -98,13 +99,13 @@ const PasswordForm = (props) => {
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faCheck} />
           </div>
-          <div id="desc">Updated Successfully</div>
+          <div id="desc">{lang.myAccount.updatedSuccessfully}</div>
         </div>
         <div className="form-group mt-4 mb-4" style={{ flexDirection: "column", alignItems: "center" }}>
           <div className="form-items">
             <label>
               <span className="required-icon">* </span>
-              Current
+              {lang.password.current}
               <FontAwesomeIcon
                 icon={faCheck}
                 className={password !== "" ? "valid" : "hide"}
@@ -128,7 +129,7 @@ const PasswordForm = (props) => {
           <div className="form-items">
             <label htmlFor="password">
               <span className="required-icon">* </span>
-              New Password
+              {lang.password.new}
               <FontAwesomeIcon
                 icon={faCheck}
                 className={validPwd ? "valid" : "hide"}
@@ -155,13 +156,14 @@ const PasswordForm = (props) => {
               className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              password is at least 6 letters
+              {lang.password.atLeast}
             </p>
           </div>
           <div className="form-items">
             <label htmlFor="confirm_pwd">
               <span className="required-icon">* </span>
-              Confirm Password
+              {lang.password.confirm}
+
               <FontAwesomeIcon
                 icon={faCheck}
                 className={validMatch && matchPwd ? "valid" : "hide"}

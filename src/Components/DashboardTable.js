@@ -7,7 +7,7 @@ const DashboardTable = ({title, success}) => {
             <table>
                 <thead>
                     <tr>
-                        <th>Contract </th>
+                        <th>Contract</th>
                         <th>Last</th>
                         <th>Change</th>
                         <th>Trade Time</th>

@@ -8,6 +8,9 @@ import { BsCreditCard2Front } from "react-icons/bs";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { SiDatabricks } from "react-icons/si";
 import { FaInstagramSquare } from "react-icons/fa";
+
+import lang from "../utils/Language";
+
 import {
   AiFillCaretDown,
   AiFillLinkedin,

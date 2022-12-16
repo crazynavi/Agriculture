@@ -4,6 +4,9 @@ import {
   faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
+
+import lang from '../../utils/Language';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AiOutlineMinus } from "react-icons/ai";
 import http from '../../utils/http-common';
@@ -181,24 +184,24 @@ const PersonalForm = (props) => {
   return (
     <>
       <div className="box-container mt-4">
-        <h1 className="text-center">USER INFORMATION</h1>
+        <h1 className="text-center">{lang.myAccount.userInformation}</h1>
         <div id="toast" className="error_toast">
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faTimes} />
           </div>
-          <div id="desc">You have to complete all the fields...</div>
+          <div id="desc">{lang.myAccount.youHaveToComplete}</div>
         </div>
         <div id="toast_success" className="success_toast">
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faCheck} />
           </div>
-          <div id="desc">Updated Successfully</div>
+          <div id="desc">{lang.myAccount.updatedSuccessfully}</div>
         </div>
         <div className="form-group mt-4 mb-4">
           <div className="form-items">
             <label htmlFor="username">
               <span className="required-icon">* </span>
-              First Name
+              {lang.myAccount.firstName}
               <FontAwesomeIcon
                 icon={faCheck}
                 className={validFirstName ? "valid" : "hide"}
@@ -228,13 +231,13 @@ const PersonalForm = (props) => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              First name field should be at least 3 letters.
+              
             </p>
           </div>
           <div className="form-items">
             <label htmlFor="lastname">
               <span className="required-icon">* </span>
-              Last Name
+              {lang.myAccount.lastName}
               <FontAwesomeIcon
                 icon={faCheck}
                 className={validLastName ? "valid" : "hide"}
@@ -263,11 +266,11 @@ const PersonalForm = (props) => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              Last name field should be at least 3 letters.
+              {lang.myAccount.lastNameShouldBe}
             </p>
           </div>
           <div className="form-items">
-            <label>Company</label>
+            <label>{lang.myAccount.company}</label>
             <input
               type={"text"}
               name={"company"}
@@ -280,7 +283,7 @@ const PersonalForm = (props) => {
           <div className="form-items">
             <label htmlFor="occupation">
               <span className="required-icon">* </span>
-              Occupation
+              {lang.myAccount.occupation}
               <FontAwesomeIcon
                 icon={faCheck}
                 className={validOccupation ? "valid" : "hide"}
@@ -344,7 +347,7 @@ const PersonalForm = (props) => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              occupation field is required
+              {lang.myAccount.occupationIsRequired}
             </p>
           </div>
           {/* <div className="form-items w-100">
@@ -359,7 +362,7 @@ const PersonalForm = (props) => {
             />
           </div> */}
           <div className="form-items w-medium">
-            <label>Country:</label>
+            <label>{lang.myAccount.country}</label>
             <input
               type={"text"}
               name={"country"}
@@ -370,7 +373,7 @@ const PersonalForm = (props) => {
             />
           </div>
           <div className="form-items w-medium">
-            <label>City</label>
+            <label>{lang.myAccount.city}</label>
             <input
               type={"text"}
               name={"city"}
@@ -381,7 +384,7 @@ const PersonalForm = (props) => {
             />
           </div>
           <div className="form-items w-small">
-            <label>State:</label>
+            <label>{lang.myAccount.state}</label>
             <input
               name={"state"}
               value={userstate}
@@ -392,7 +395,7 @@ const PersonalForm = (props) => {
             />
           </div>
           <div className="form-items w-small">
-            <label>Postal:</label>
+            <label>{lang.myAccount.postal}</label>
             <input
               name={"postal"}
               value={postal}
@@ -405,7 +408,7 @@ const PersonalForm = (props) => {
           <div className="form-items">
             <label htmlFor="phone">
               <span className="required-icon">* </span>
-              Phone Number
+              {lang.myAccount.phoneNumber}
               <FontAwesomeIcon
                 icon={faCheck}
                 className={validPhoneNumber ? "valid" : "hide"}
@@ -447,13 +450,13 @@ const PersonalForm = (props) => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              Please input valid phone number
+              {lang.myAccount.validPhoneNumber}
             </p>
           </div>
           <div className="form-items">
             <label htmlFor="email">
               <span className="required-icon">* </span>
-              Email
+              {lang.myAccount.email}
               <FontAwesomeIcon
                 icon={faCheck}
                 className={validEmail ? "valid" : "hide"}
@@ -480,13 +483,13 @@ const PersonalForm = (props) => {
               className={email && !validEmail ? "instructions" : "offscreen"}
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              Invalid email
+              {lang.myAccount.validEmail}
             </p>
           </div>
         </div>
       </div>
       <div className="box-container mt-4">
-        <h1 className="text-center">DEVICES</h1>
+        <h1 className="text-center">{lang.myAccount.devices}</h1>
         <div className="devices-section mt-3 mb-4 d-flex flex-wrap align-items-cener">
           {devices.map((device, index)=>{
             return(
@@ -494,7 +497,7 @@ const PersonalForm = (props) => {
               <span onClick={()=>{cancelDevice(device)}} className="me-2">
                 <AiOutlineMinus />
               </span>
-              <div>{device.meta_value} Device Added</div>
+              <div>{device.meta_value} {lang.myAccount.deviceAdded}</div>
             </div>
             );
           })}

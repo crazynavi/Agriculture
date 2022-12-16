@@ -1266,12 +1266,8 @@
     color: #fff;
 }
 #toast #desc, #toast_success #desc{
-
-    
     color: #fff;
-   
     padding: 16px;
-    
     overflow: hidden;
 	white-space: nowrap;
 }

@@ -1,22 +1,10 @@
 import React from "react";
 import Image from "../assets/reports-image.png";
 
+import lang from "../utils/Language";
+
 const ReportsCard = ({ setShowSingleArchive, data, setID }) => {
   const date = new Date(Number(data.published_at)*1000);
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
   return (
     <div
       className="reports-card-container mb-4"
@@ -33,7 +21,7 @@ const ReportsCard = ({ setShowSingleArchive, data, setID }) => {
         <small>{data.subtitle}</small>
       </div>
       <div className="report-date">
-        <h2>{monthNames[date.getMonth()]}</h2>
+        <h2>{lang.monthNames[date.getMonth()]}</h2>
         <h1>{date.getDate()}</h1>
       </div>
     </div>

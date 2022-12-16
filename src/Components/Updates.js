@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import UpdatesCard from "./UpdatesCard";
-import http from "../utils/http-common";
+import UpdatesCard from './UpdatesCard'
+import http from '../utils/http-common';
 import LoadingSpinner from "../Components/LoadingSpinner";
+import lang from '../utils/Language'
 
 const Updates = (props) => {
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,7 @@ const Updates = (props) => {
   }, []);
   return (
     <div className="box-container">
-      <h2 className="box-heading">Latest Updates</h2>
+      <h2 className="box-heading">{lang.updates.latest}</h2>
       {loading && (
         <div style={{minHeight:"calc(6rem + 20px)"}}>
           <LoadingSpinner />
