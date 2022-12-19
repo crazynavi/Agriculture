@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import logo from "../../assets/US-Logo.png";
 import Button from "./Button";
 import FluidInput from "./FluidInput";
 import http from "../../utils/http-common";
+
+import lang from "../../utils/Language";
 
 export default function Login({ setToken }) {
   const passwordERef = useRef();
@@ -86,14 +87,14 @@ export default function Login({ setToken }) {
   return (
     <div className="login-container">
       <div className="logo">
-        <img src={logo} alt="AgResource Company Logo" />
+        <img src={lang.logo.url} alt={lang.logo.alt} />
       </div>
       <FluidInput
         setIsEmpty={setIsEmpty}
         firstEmpty={firstEmpty}
         setFirstEmpty={setFirstEmpty}
         type="text"
-        label="Username or Email Address"
+        label={lang.login.usernameOrEmail}
         id="username"
         style={style}
         field="username"
@@ -106,7 +107,7 @@ export default function Login({ setToken }) {
         setFirstEmpty={setFirstPwsEmpty}
         ref={passwordERef}
         type="password"
-        label="password"
+        label={lang.login.password}
         id="password"
         style={style}
         field="password"
@@ -125,14 +126,14 @@ export default function Login({ setToken }) {
               className="fluid-input-input"
               type="label"
               readOnly
-              defaultValue="Invalid Username and Password"
+              defaultValue={lang.login.invalidUser}
             />
           </div>
         </div>
       )}
       <Button
         disabled={loading}
-        buttonText="log in"
+        buttonText={lang.login.login}
         buttonClass="login-button"
         onClick={handleSubmit}
       />
