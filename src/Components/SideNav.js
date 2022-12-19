@@ -25,50 +25,52 @@ const SideNav = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   return (
     <div className="side-nav-container">
-      <div>
+      <div style={{width:'100%'}}>
         <div className="logo">
           <img src={Logo} alt="logo" />
         </div>
         <div className="navbar">
           <NavLink end className="nav-item" to={"/"}>
             <IoHome />
-            <span className="ms-2">HOME</span>
+            <span className="ms-2">{lang.navbar.home}</span>
           </NavLink>
           <div className="nav-item" onClick={() => setMenuOpen(!isMenuOpen)}>
             <SiDatabricks />
-            <span className="ms-2">REPORTS</span>
+            <span className="ms-2">{lang.navbar.reports}</span>
             <AiFillCaretDown className="ms-2" />
           </div>
           {isMenuOpen && (
             <div className="sub-menu" style={{position: "relative"}}>
               <div className="custom">
               {isRoleAllowed([632, 631, 628]) && (
-                <NavLink to={"/report-daily"}>Daily Newsletter</NavLink>
+                <NavLink to={"/report-daily"}>{lang.navbar.daily}</NavLink>
               )}
               {isRoleAllowed([636, 637,638]) && (
-                <NavLink to={"/report-weekly"}>Weekly Newsletter</NavLink>
+                <NavLink to={"/report-weekly"}>{lang.navbar.reports}</NavLink>
               )}
               {isRoleAllowed([639,640,641]) && (
-                <NavLink to={"/report-plus"}>Plus+ Report</NavLink>
+                <NavLink to={"/report-plus"}>{lang.navbar.plus}</NavLink>
               )}
               {isRoleAllowed([642,643,644]) && (
-                <NavLink to={"/report-latam"}>LATAM Newsletter</NavLink>
+                <NavLink to={"/report-latam"}>{lang.navbar.latam}</NavLink>
               )}
               {isRoleAllowed([645,646,647]) && (
-                <NavLink to={"/report-climate"}>Climate Impact</NavLink>
+                <NavLink to={"/report-climate"}>{lang.navbar.climate}</NavLink>
               )}
               </div>
             </div>
           )}
+          
           {isRoleAllowed([119125]) && (
             <NavLink className="nav-item" to={"/my-account"}>
               <BsCreditCard2Front />
-              <span className="ms-2">MY ACCOUNT</span>
+              <span className="ms-2">{lang.navbar.myAccount}</span>
             </NavLink>
           )}
+          
           <NavLink className="nav-item" to={"/privacy"}>
             <RiErrorWarningLine />
-            <span className="ms-2">PRIVACY POLICY</span>
+            <span className="ms-2">{lang.navbar.privacyPolicy}</span>
           </NavLink>
           <p
             className="nav-item bg-black"
@@ -80,12 +82,12 @@ const SideNav = () => {
               }}
             > 
                <FontAwesomeIcon icon={faRightFromBracket}/>
-               <span className="ms-2">  Sign out</span>
+               <span className="ms-2"> {lang.navbar.signOut}</span>
             </p>
         </div>
       </div>
       <div className="w-100">
-        <p>Follow AgResource</p>
+        <p>{lang.navbar.followAg}</p>
         <div className="social-icons mt-2  d-flex justify-content-between">
           <AiFillLinkedin />
           <AiOutlineTwitter />
@@ -101,10 +103,9 @@ const SideNav = () => {
           </div>
           <div>
             <div className="d-flex">
-            <h4>{(JSON.parse(localStorage.getItem("tokenData")).user_data.user_name).replace(/^./, str => str.toUpperCase())}</h4>
-
+            {/* <h4>{(JSON.parse(localStorage.getItem("tokenData")).user_data.user_name).replace(/^./, str => str.toUpperCase())}</h4> */}
             </div>
-            <h3 className="text-center">{`${JSON.parse(localStorage.getItem("tokenData")).user_data.first_name??""} ${JSON.parse(localStorage.getItem("tokenData")).user_data.last_name??""}`}</h3>
+            <h3 className="text-center">{lang.navbar.hello} {`${JSON.parse(localStorage.getItem("tokenData")).user_data.first_name??""} ${JSON.parse(localStorage.getItem("tokenData")).user_data.last_name??""}`}</h3>
           </div>
         </div>
       </div>

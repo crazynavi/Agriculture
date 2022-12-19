@@ -3,8 +3,17 @@ let currentLanguage = "";
 currentLanguage = "pt_BR";
 
 let lang = {
+    logo: {
+        url: "/US-Logo.png",
+        alt: "AgResource Company Logo"
+    },
+    login: {
+        usernameOrEmail: "Username or Email Address",
+        password: "password",
+        invalidUser: 'Invalid Username and Password',
+        login: "Log in"
+    },
     navbar: {
-        /** Navbar */
         home: "HOME",
         reports: "REPORTS",
         daily: "Daily Newsletter",
@@ -19,7 +28,6 @@ let lang = {
         hello: "Hello, ",
     },
     dashboardTable: {
-        /** Dashboard Table */
         corn: "Corn",
         soybeans: "Soybeans",
         soybeanmeal: "Soybean Meal",
@@ -44,6 +52,14 @@ let lang = {
         "November",
         "December",
     ],
+    account: {
+        personal: "PERSONAL",
+        password: "PASSWORD",
+        business: "BUSINESS",
+        subscriptions: "SUBSCRIPTIONS",
+        payment: "PAYMENT",
+        update: "UPDATE",
+    },
     myAccount: {
         userInformation: "USER INFORMATION",
         firstName: "First name",
@@ -72,13 +88,30 @@ let lang = {
         new: "Type a new password",
         confirm: "Confirm the new password",
         atLeast: "The password must be at least 6 characters"
+    },
+    reportDaily: {
+        morning: "MORNING",
+        noon: "NOON",
+        evening: "EVENING",
+        saturday: "SATURDAY",
+        sunday: "SUNDAY",
+        breaking: "BREAKING",
     }
 }
 
-if (currentLanguage == "pt_BR") {
+if (currentLanguage === "pt_BR") {
     lang = {
+        logo: {
+            url: "/BR-Logo.png",
+            alt: "AgResource  Brasil"
+        },
+        login: {
+            usernameOrEmail: "Usuário ou endereço de e-mail",
+            password: "Senha",
+            invalidUser: 'Usuário ou senha inválido.',
+            login: 'Entrar',
+        },
         navbar : {
-            /** Navbar */
             home: "INÍCIO",
             reports: "RELATÓRIOS",
             daily: "Diário",
@@ -93,7 +126,6 @@ if (currentLanguage == "pt_BR") {
             hello: "Olá, ",
         },
         dashboardTable: {
-            /** Dashboard Table */
             corn: "Corn",
             soybeans: "Soybeans",
             soybeanmeal: "Soybean Meal",
@@ -118,6 +150,14 @@ if (currentLanguage == "pt_BR") {
             "Novembro",
             "Dezembro",
         ],
+        account: {
+            personal: "PESSOAL",
+            password: "SENHA",
+            business: "USUÁRIOS",
+            subscriptions: "PLANOS",
+            payment: "PAGAMENTOS",
+            update: "ATUALIZAR",
+        },
         myAccount: {
             userInformation: "INFORMAÇÕES PESSOAIS",
             firstName: "Nome",
@@ -147,6 +187,14 @@ if (currentLanguage == "pt_BR") {
             confirm: "Confirme a nova senha",
             atLeast: "A nova senha precisa ser ao menos 6 caracteres",
         },
+        reportDaily: {
+            morning: "MANHÃ",
+            noon: "TARDE",
+            evening: "NOITE",
+            saturday: "SÁBADO",
+            sunday: "DOMINGO",
+            breaking: "BREAKING",
+        }
     }
 }
 

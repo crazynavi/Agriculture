@@ -8,6 +8,7 @@ import { FcLeft } from 'react-icons/fc'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import banner from '../assets/updates-2.jpg'
 import Timestamp from 'react-timestamp'
+import lang from "../utils/Language";
 
 const Dashboard = () => {
   const [showdetail, setShowdetail] = useState(false);
@@ -30,7 +31,7 @@ const Dashboard = () => {
           onClick={() => setShowdetail(false)}
         >
           <FcLeft />
-          <h2 className="ms-2">Archives</h2>
+          <h2 className="ms-2">{lang.reportArchives.back}</h2>
         </div>
         <div className="d-flex align-items-center">
           <div className="small-text d-flex align-items-center">

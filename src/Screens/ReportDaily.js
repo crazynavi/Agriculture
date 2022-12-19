@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ReportsArchives from "../Components/Reports/ReportsArchives";
 import http from "../utils/http-common";
 import LoadingSpinner from "../Components/LoadingSpinner";
+import lang from "../utils/Language";
+
 const ReportDaily = () => {
   const [data, setData] = useState([]);
   const [tab, setTab] = useState("morning");
@@ -82,7 +84,7 @@ const ReportDaily = () => {
               }}
               className={tab === "morning" ? "active" : ""}
             >
-              MORNING
+              {lang.reportDaily.morning}
             </div>
             <div
               onClick={() => {
@@ -91,7 +93,7 @@ const ReportDaily = () => {
               }}
               className={tab === "noon" ? "active" : ""}
             >
-              NOON
+              {lang.reportDaily.noon}
             </div>
             <div
               onClick={() => {
@@ -100,7 +102,7 @@ const ReportDaily = () => {
               }}
               className={tab === "evening" ? "active" : ""}
             >
-              EVENING
+              {lang.reportDaily.evening}
             </div>
             <div
               onClick={() => {
@@ -109,7 +111,7 @@ const ReportDaily = () => {
               }}
               className={tab === "saturday" ? "active" : ""}
             >
-              SATURDAY
+              {lang.reportDaily.saturday}
             </div>
             <div
               onClick={() => {
@@ -118,7 +120,7 @@ const ReportDaily = () => {
               }}
               className={tab === "sunday" ? "active" : ""}
             >
-              SUNDAY
+              {lang.reportDaily.sunday}
             </div>
             <div
               onClick={() => {
@@ -127,7 +129,7 @@ const ReportDaily = () => {
               }}
               className={tab === "breaking" ? "active" : ""}
             >
-              BREAKING
+              {lang.reportDaily.breaking}
             </div>
           </div>
           <ReportsArchives
