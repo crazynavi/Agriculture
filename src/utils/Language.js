@@ -1,6 +1,6 @@
 let currentLanguage = "";
-// currentLanguage = "en_US";
-currentLanguage = "pt_BR";
+currentLanguage = "en_US";
+// currentLanguage = "pt_BR";
 
 let lang = {
     logo: {
@@ -106,15 +106,15 @@ if (currentLanguage === "pt_BR") {
             alt: "AgResource  Brasil"
         },
         login: {
-            usernameOrEmail: "Usuário ou endereço de e-mail",
+            usernameOrEmail: "Usuï¿½rio ou endereï¿½o de e-mail",
             password: "Senha",
-            invalidUser: 'Usuário ou senha inválido.',
+            invalidUser: 'Usuï¿½rio ou senha invï¿½lido.',
             login: 'Entrar',
         },
         navbar : {
-            home: "INÍCIO",
-            reports: "RELATÓRIOS",
-            daily: "Diário",
+            home: "INï¿½CIO",
+            reports: "RELATï¿½RIOS",
+            daily: "Diï¿½rio",
             weekly: "Semanal",
             plus: "Plus+",
             latam: "LATAM",
@@ -123,7 +123,7 @@ if (currentLanguage === "pt_BR") {
             privacyPolicy: "PRIVACIDADE",
             signOut: "Sair",
             followAg: "Seguir AgResource",
-            hello: "Olá, ",
+            hello: "Olï¿½, ",
         },
         dashboardTable: {
             corn: "Corn",
@@ -131,7 +131,7 @@ if (currentLanguage === "pt_BR") {
             soybeanmeal: "Soybean Meal",
         },
         updates: {
-            latest: "Últimos relatórios",
+            latest: "ï¿½ltimos relatï¿½rios",
         },
         reportArchives: {
             back: "Voltar",
@@ -139,7 +139,7 @@ if (currentLanguage === "pt_BR") {
         monthNames: [
             "Janeiro",
             "Fevereiro",
-            "Março",
+            "Marï¿½o",
             "Abril",
             "Maio",
             "Junho",
@@ -153,18 +153,18 @@ if (currentLanguage === "pt_BR") {
         account: {
             personal: "PESSOAL",
             password: "SENHA",
-            business: "USUÁRIOS",
+            business: "USUï¿½RIOS",
             subscriptions: "PLANOS",
             payment: "PAGAMENTOS",
             update: "ATUALIZAR",
         },
         myAccount: {
-            userInformation: "INFORMAÇÕES PESSOAIS",
+            userInformation: "INFORMAï¿½ï¿½ES PESSOAIS",
             firstName: "Nome",
             lastName: "Sobrenome",
             company: "Empresa",
             occupation: "Cargo",
-            country: "País",
+            country: "Paï¿½s",
             city: "Cidade",
             state: "Estado",
             postal: "CEP",
@@ -173,11 +173,11 @@ if (currentLanguage === "pt_BR") {
             devices: "DISPOSITIVOS",
             youHaveToComplete: "Preencha todos os campos para atualizar...",
             updatedSuccessfully: "Perfil atualizado com sucesso...",
-            firstNameShouldBe: "O nome precisa ter no mínimo três letras.",
-            lastNameNameShouldBe: "O sobrenome precisa ter no mínimo três letras.",
-            occupationIsRequired: "Cargo é obrigatório",
-            validPhoneNumber: "Por favor, insira um telefone válido.",
-            validEmail: "E-mail inválido.",
+            firstNameShouldBe: "O nome precisa ter no mï¿½nimo trï¿½s letras.",
+            lastNameNameShouldBe: "O sobrenome precisa ter no mï¿½nimo trï¿½s letras.",
+            occupationIsRequired: "Cargo ï¿½ obrigatï¿½rio",
+            validPhoneNumber: "Por favor, insira um telefone vï¿½lido.",
+            validEmail: "E-mail invï¿½lido.",
             deviceAdded: "dispositivo",
         },
         password: {
@@ -188,10 +188,10 @@ if (currentLanguage === "pt_BR") {
             atLeast: "A nova senha precisa ser ao menos 6 caracteres",
         },
         reportDaily: {
-            morning: "MANHÃ",
+            morning: "MANHï¿½",
             noon: "TARDE",
             evening: "NOITE",
-            saturday: "SÁBADO",
+            saturday: "Sï¿½BADO",
             sunday: "DOMINGO",
             breaking: "BREAKING",
         }

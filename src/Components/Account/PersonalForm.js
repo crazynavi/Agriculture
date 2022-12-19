@@ -12,6 +12,7 @@ import { AiOutlineMinus } from "react-icons/ai";
 import http from '../../utils/http-common';
 import PhoneInput from "react-phone-input-2";
 import 'react-phone-input-2/lib/style.css'
+import LoadingSpinner from "../LoadingSpinner";
 
 const style = {
   appearance: "none",
@@ -34,6 +35,8 @@ const PersonalForm = (props) => {
 
   const userRef = useRef();
   const errRef = useRef();
+
+  const [loading, setLoading] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [validFirstName, setValidFirstName] = useState(false);
@@ -91,9 +94,13 @@ const PersonalForm = (props) => {
     let validated = validEmail && validFirstName && validLastName && validOccupation && validPhoneNumber;
     if (currentTab === "personal", updateState !== 0) {
       if (validated) {
+        setLoading(true);
         http.post("account/update", { first_name: firstName, last_name: lastName, email: email, phone: phoneNumber, country: country, city: city, state: userstate, zip: postal, occupation: occupation, company: company })
           .then((res) => {
             launch_toast2();
+          })
+          .then(()=>{
+            setLoading(false);
           })
           .catch(
             (err) => {
@@ -107,6 +114,7 @@ const PersonalForm = (props) => {
   }, [updateState])
 
   useEffect(() => {
+    setLoading(true);
     http.get("account").then((res) => {
       const data = res.data.data;
       setFirstName(data.first_name);
@@ -119,7 +127,7 @@ const PersonalForm = (props) => {
       setPostal(data.zip);
       setPhoneNumber(data.phone);
       setCountry(data.country);
-    });
+    }).then(()=>{setLoading(false)});
   }, []);
 
   useEffect(() => {
@@ -185,6 +193,9 @@ const PersonalForm = (props) => {
     <>
       <div className="box-container mt-4">
         <h1 className="text-center">{lang.myAccount.userInformation}</h1>
+        {loading&&<div className="p-2">
+        <LoadingSpinner />
+        </div>}
         <div id="toast" className="error_toast">
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faTimes} />
@@ -212,6 +223,7 @@ const PersonalForm = (props) => {
               />
             </label>
             <input
+              disabled={loading}
               type="text"
               id="username"
               name="first_name"
@@ -248,6 +260,7 @@ const PersonalForm = (props) => {
               />
             </label>
             <input
+            disabled={loading}
               type="text"
               id="lastname"
               name={"last_name"}
@@ -272,6 +285,7 @@ const PersonalForm = (props) => {
           <div className="form-items">
             <label>{lang.myAccount.company}</label>
             <input
+            disabled={loading}
               type={"text"}
               name={"company"}
               value={company}
@@ -364,6 +378,7 @@ const PersonalForm = (props) => {
           <div className="form-items w-medium">
             <label>{lang.myAccount.country}</label>
             <input
+            disabled={loading}
               type={"text"}
               name={"country"}
               value={country}
@@ -375,6 +390,7 @@ const PersonalForm = (props) => {
           <div className="form-items w-medium">
             <label>{lang.myAccount.city}</label>
             <input
+            disabled={loading}
               type={"text"}
               name={"city"}
               value={city}
@@ -386,6 +402,7 @@ const PersonalForm = (props) => {
           <div className="form-items w-small">
             <label>{lang.myAccount.state}</label>
             <input
+            disabled={loading}
               name={"state"}
               value={userstate}
               onChange={(e) => {
@@ -397,6 +414,7 @@ const PersonalForm = (props) => {
           <div className="form-items w-small">
             <label>{lang.myAccount.postal}</label>
             <input
+            disabled={loading}
               name={"postal"}
               value={postal}
               onChange={(e) => {
@@ -432,6 +450,7 @@ const PersonalForm = (props) => {
               onBlur={() => setPhoneNumberFocus(false)}
             /> */}
             <input
+            disabled={loading}
               type="text"
               name="phone_number"
               id="phone"
@@ -467,6 +486,7 @@ const PersonalForm = (props) => {
               />
             </label>
             <input
+            disabled={loading}
               type="text"
               id="email"
               name={"email"}

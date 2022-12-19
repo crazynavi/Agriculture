@@ -715,6 +715,7 @@
 }
 
 .subscription-table h1 {
+    font-size: 25px;
     font-weight: 600;
 }
 
@@ -725,23 +726,23 @@
 }
 
 .cancel-btn {
-    padding: 4px 14px;
-    border-radius: 0;
+    padding: 10px 20px;
+    border-radius: 10px;
     border: 0;
     background-color: #F78D1F;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     font-weight: 600;
 }
 
 .success-btn {
-    padding: 4px 14px;
-    border-radius: 0;
+    padding: 10px 20px;
+    border-radius: 10px;
     border: 0;
     background-color: #026937;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     font-weight: 600;
 }
