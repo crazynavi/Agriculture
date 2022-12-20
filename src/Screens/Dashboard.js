@@ -10,6 +10,7 @@ import banner from '../assets/updates-2.jpg'
 import Timestamp from 'react-timestamp'
 import lang from "../utils/Language";
 
+
 const Dashboard = () => {
   const [showdetail, setShowdetail] = useState(false);
   const [detaildata, setDetaildata] = useState({});
