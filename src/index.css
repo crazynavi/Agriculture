@@ -312,6 +312,7 @@
 
 .dashboard-container {
     display: flex;
+    min-height: 70%;
     justify-content: space-between;
 }
 
@@ -1046,6 +1047,7 @@
 
 .spinner-container{
     height: 90%;
+    width: 100%;
     align-items: center;
 }
 
