@@ -9,21 +9,28 @@ import PaymentForm from '../Components/Account/PaymentForm';
 import PersonalForm from '../Components/Account/PersonalForm';
 import SubscriptionTable from '../Components/Account/SubscriptionTable';
 import lang from "../utils/Language"
+import { useSearchParams } from 'react-router-dom';
 // import http from '../utils/http-common';
 
-const Account = () => {
+const Account = (props) => {
   
   const [tab, setTab] = useState('personal')
   const [showModal1, setShowModal1] = useState(false)
   const [showModal2, setShowModal2] = useState(false)
   const [showDiscountModal, setShowDiscountModal] = useState(false)
   const [updateState, setUpdateState] = useState(0);
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  useEffect(() => {
+    let param = searchParams.get("tab");
+    if(param === "sub"){
+      setTab("subscriptions");
+    }
+    setSearchParams();
+  }, []);
   const handleSubmit = (e) =>{
     e.preventDefault();
     setUpdateState(updateState=>updateState+1)
   }
-  console.log(updateState);
   return (
     <>
       <div className='top-tabs'>

@@ -32,7 +32,7 @@ const SideNav = () => {
           <img src={Logo} alt="logo" />
         </div>
         <div className="navbar">
-          <NavLink end className="nav-item" to={"/"}>
+          <NavLink end className="nav-item" to={""}>
             <IoHome />
             <span className="ms-2">{lang.navbar.home}</span>
           </NavLink>
@@ -45,19 +45,19 @@ const SideNav = () => {
             <div className="sub-menu" style={{ position: "relative" }}>
               <div className="custom">
                 {isRoleAllowed([632, 631, 628]) && (
-                  <NavLink to={"/report-daily"}>{lang.navbar.daily}</NavLink>
+                  <NavLink to={"report-daily"}>{lang.navbar.daily}</NavLink>
                 )}
                 {isRoleAllowed([636, 637, 638]) && (
-                  <NavLink to={"/report-weekly"}>{lang.navbar.reports}</NavLink>
+                  <NavLink to={"report-weekly"}>{lang.navbar.reports}</NavLink>
                 )}
                 {isRoleAllowed([639, 640, 641]) && (
-                  <NavLink to={"/report-plus"}>{lang.navbar.plus}</NavLink>
+                  <NavLink to={"report-plus"}>{lang.navbar.plus}</NavLink>
                 )}
                 {isRoleAllowed([642, 643, 644]) && (
-                  <NavLink to={"/report-latam"}>{lang.navbar.latam}</NavLink>
+                  <NavLink to={"report-latam"}>{lang.navbar.latam}</NavLink>
                 )}
                 {isRoleAllowed([645, 646, 647]) && (
-                  <NavLink to={"/report-climate"}>
+                  <NavLink to={"report-climate"}>
                     {lang.navbar.climate}
                   </NavLink>
                 )}

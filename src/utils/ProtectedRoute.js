@@ -4,7 +4,7 @@ import { isRoleAllowed } from "./isRoleAllowed";
 
 export const ProtectedRoute = ({
   role,
-  redirectPath = "/",
+  redirectPath = "",
 }) => {
   if (!isRoleAllowed(role)) {
     return <Navigate to={redirectPath} replace />;

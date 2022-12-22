@@ -54,6 +54,10 @@
     margin-top: 2.5rem;
 }
 
+.ms-0 {
+    margin-left: 0!important;
+}
+
 .ms-2 {
     margin-left: .5rem;
 }

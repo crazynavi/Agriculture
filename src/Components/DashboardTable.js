@@ -3,7 +3,6 @@ import React from "react";
 const DashboardTable = ({ data }) => {
   const success = true;
   const info = Object.values(data)[0][0];
-  console.log(info);
   const MONTH_CODES = {
     F: "January",
     G: "February",
