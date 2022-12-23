@@ -10,6 +10,19 @@ import {
 import http from "../../utils/http-common";
 import lang from "../../utils/Language";
 
+const ROLE_CODES = {
+  631: "Daily Month",
+  632: "Daily Year",
+  637: "Weekly Month",
+  636: "Weekly Year",
+  640: "Plus Month",
+  639: "Plus Year",
+  643: "Latam Month",
+  642: "Latam Year",
+  646: "Impact Month",
+  645: "Impact Year",
+};
+
 const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const style = {
@@ -45,6 +58,7 @@ const BusinessForm = () => {
   const [successMsg, setSuccessMsg] = useState("");
 
   const [list, setList] = useState([]);
+  const [allowed, setAllowed] = useState({});
 
   const addUser = () => {
     let x = document.getElementById("addUser");
@@ -71,41 +85,28 @@ const BusinessForm = () => {
 
   const cancelSub = (data) => {
     console.log(data);
-    const { first_name, last_name, id, subscription_id } = data;
+    const { first_name, last_name, id, role, subscription_id } = data;
     const email = data.forward_email;
 
-    setList(list.filter(
-        (item) =>
-          item.forward_email != email ||
-          item.id != id ||
-          item.subscription_id != subscription_id
-      ));
-    // http
-    //   .post("subscription-userinfo-remove", {
-    //     first_name,
-    //     last_name,
-    //     email,
-    //     id,
-    //     subscription_id,
-    //   })
-    //   .then((res) => {
-    //     setList(
-    //       list.filter((item) => {
-    //         return (
-    //           item.forward_email != email &&
-    //           item.id != id &&
-    //           item.subscription_id != subscription_id
-    //         );
-    //       })
-    //     );
-    //     //   let new_devices = devices.filter((dev)=>{
-    //     //     return dev != device
-    //     //   })
-    //     //   setDevices(new_devices);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    http
+      .post("subscription-userinfo-remove", {
+        first_name,
+        last_name,
+        email,
+        id,
+        subscription_id,
+      })
+      .then((res) => {
+        setList(
+          list.filter(
+            (item) =>
+              item.forward_email != email || item.id != id || item.role != role
+          )
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleCancel = () => {
@@ -118,32 +119,51 @@ const BusinessForm = () => {
 
   const handleConfirm = () => {
     if (validFirstName && validLastName && validEmail && validrole) {
-      http
-        .post("subscription-assign", {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          role_id: role,
-        })
-        .then((res) => {
-          launch_toast2("added successfully");
-          setEmail("");
-          setFirstName("");
-          setLasttName("");
-          setrole("");
-          let x = document.getElementById("addUser");
-          x.className = "hide";
-        })
-        .catch((err) => {
-          launch_toast(err.response.data.data.message);
-        });
+      if (allowed[role] !== undefined && allowed[role] >= 0) {
+        http
+          .post("subscription-assign", {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            role_id: role,
+          })
+          .then((res) => {
+            launch_toast2("added successfully");
+            setEmail("");
+            setFirstName("");
+            setLasttName("");
+            setrole("");
+            let x = document.getElementById("addUser");
+            x.className = "hide";
+          })
+          .then(() => {
+            setList([
+              {
+                first_name: firstName,
+                last_name: lastName,
+                forward_email: email,
+                role: role,
+              },
+              ...list,
+            ]);
+            setAllowed({
+              ...allowed,
+              role: allowed[role] - 1,
+            });
+          })
+          .catch((err) => {
+            launch_toast(err.response.data.data.message);
+          });
+      } else {
+        launch_toast("You need to buy extra subscriptions");
+      }
     } else {
       launch_toast("Please complete all the fields");
     }
   };
   useEffect(() => {
     http.get("business-available-subscription-lists").then((res) => {
-      console.log(res.data.data);
+      setAllowed(res.data.data[0]);
     });
     http.get("account-business").then((res) => {
       setList(res.data.data);
@@ -259,7 +279,7 @@ const BusinessForm = () => {
                 {lang.myAccount.lastNameShouldBe}
               </p>
             </div>
-            <div className="form-items w-100">
+            <div className="form-items">
               <label htmlFor="email">
                 <span className="required-icon">* </span>
                 {lang.myAccount.email}
@@ -292,7 +312,7 @@ const BusinessForm = () => {
                 {lang.myAccount.validEmail}
               </p>
             </div>
-            <div className="form-items w-100">
+            <div className="form-items">
               <label htmlFor="role">
                 <span className="required-icon">* </span>
                 Role
@@ -387,6 +407,7 @@ const BusinessForm = () => {
                 <th>{lang.myAccount.firstName}</th>
                 <th>{lang.myAccount.lastName}</th>
                 <th>{lang.myAccount.email}</th>
+                <th>Subscription_id</th>
               </tr>
             </thead>
             <tbody>
@@ -401,6 +422,7 @@ const BusinessForm = () => {
                     <td>{item.first_name}</td>
                     <td>{item.last_name}</td>
                     <td>{item.forward_email}</td>
+                    <td>{ROLE_CODES[item.role]}</td>
                   </tr>
                 );
               })}
