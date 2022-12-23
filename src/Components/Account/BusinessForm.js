@@ -12,7 +12,18 @@ import lang from "../../utils/Language";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-
+const style = {
+  appearance: "none",
+  backgroundColor: "#EDF1F4",
+  border: 0,
+  borderRadius: "7px",
+  padding: "15px",
+  marginTop: "5px",
+  width: "calc(100% - 30px)",
+};
+const optionStyle = {
+  fontSize: "20px",
+};
 const BusinessForm = () => {
   const [firstName, setFirstName] = useState("");
   const [validFirstName, setValidFirstName] = useState(false);
@@ -26,9 +37,75 @@ const BusinessForm = () => {
   const [validEmail, setValidEmail] = useState(false);
   const [emailFocus, setEmailFocus] = useState(false);
 
+  const [role, setrole] = useState("");
+  const [validrole, setValidrole] = useState(false);
+  const [roleFocus, setroleFocus] = useState(false);
+
+  const [errMsg, setErrMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+
+  const [list, setList] = useState([]);
+
   const addUser = () => {
     let x = document.getElementById("addUser");
     x.className = "";
+  };
+  const launch_toast = (errMsg) => {
+    setErrMsg(errMsg);
+    let xxx = document.getElementsByClassName("error_toast");
+    let x = xxx[0];
+    x.className = "error_toast show";
+    setTimeout(function () {
+      x.className = x.className.replace("show", "");
+    }, 5000);
+  };
+  const launch_toast2 = (successMsg) => {
+    setSuccessMsg(successMsg);
+    let xxx = document.getElementsByClassName("success_toast");
+    let x = xxx[0];
+    x.className = "success_toast show";
+    setTimeout(function () {
+      x.className = x.className.replace("show", "");
+    }, 5000);
+  };
+
+  const cancelSub = (data) => {
+    console.log(data);
+    const { first_name, last_name, id, subscription_id } = data;
+    const email = data.forward_email;
+
+    setList(list.filter(
+        (item) =>
+          item.forward_email != email ||
+          item.id != id ||
+          item.subscription_id != subscription_id
+      ));
+    // http
+    //   .post("subscription-userinfo-remove", {
+    //     first_name,
+    //     last_name,
+    //     email,
+    //     id,
+    //     subscription_id,
+    //   })
+    //   .then((res) => {
+    //     setList(
+    //       list.filter((item) => {
+    //         return (
+    //           item.forward_email != email &&
+    //           item.id != id &&
+    //           item.subscription_id != subscription_id
+    //         );
+    //       })
+    //     );
+    //     //   let new_devices = devices.filter((dev)=>{
+    //     //     return dev != device
+    //     //   })
+    //     //   setDevices(new_devices);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   const handleCancel = () => {
@@ -38,14 +115,38 @@ const BusinessForm = () => {
     let x = document.getElementById("addUser");
     x.className = "hide";
   };
+
   const handleConfirm = () => {
-    let x = document.getElementById("addUser");
-    x.className = "hide";
-    alert("success");
+    if (validFirstName && validLastName && validEmail && validrole) {
+      http
+        .post("subscription-assign", {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          role_id: role,
+        })
+        .then((res) => {
+          launch_toast2("added successfully");
+          setEmail("");
+          setFirstName("");
+          setLasttName("");
+          setrole("");
+          let x = document.getElementById("addUser");
+          x.className = "hide";
+        })
+        .catch((err) => {
+          launch_toast(err.response.data.data.message);
+        });
+    } else {
+      launch_toast("Please complete all the fields");
+    }
   };
   useEffect(() => {
     http.get("business-available-subscription-lists").then((res) => {
-      console.log(res.data.data[0]);
+      console.log(res.data.data);
+    });
+    http.get("account-business").then((res) => {
+      setList(res.data.data);
     });
   }, []);
   useEffect(() => {
@@ -58,9 +159,24 @@ const BusinessForm = () => {
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
   }, [email]);
+  useEffect(() => {
+    setValidrole(role !== "" ? true : false);
+  }, [role]);
   return (
     <>
       <div className="box-container mt-4">
+        <div id="toast" className="error_toast">
+          <div id="img" className="bg-info">
+            <FontAwesomeIcon icon={faTimes} />
+          </div>
+          <div id="desc">{errMsg}</div>
+        </div>
+        <div id="toast_success" className="success_toast">
+          <div id="img" className="bg-info">
+            <FontAwesomeIcon icon={faCheck} />
+          </div>
+          <div id="desc">{successMsg}</div>
+        </div>
         <div
           className="add-newsletter-btn"
           onClick={() => {
@@ -176,6 +292,74 @@ const BusinessForm = () => {
                 {lang.myAccount.validEmail}
               </p>
             </div>
+            <div className="form-items w-100">
+              <label htmlFor="role">
+                <span className="required-icon">* </span>
+                Role
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className={validrole ? "valid" : "hide"}
+                />
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className={validrole || !role ? "hide" : "invalid"}
+                />
+              </label>
+              <select
+                className="form-control"
+                style={style}
+                name="role"
+                id="role"
+                autoComplete="off"
+                value={role}
+                onChange={(e) => {
+                  setrole(e.target.value);
+                }}
+                aria-invalid={validrole ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setroleFocus(true)}
+                onBlur={() => setroleFocus(false)}
+              >
+                <option style={{}} value=""></option>
+                <option style={optionStyle} value="631">
+                  Daily Month
+                </option>
+                <option style={optionStyle} value="632">
+                  Daily Year
+                </option>
+                <option style={optionStyle} value="637">
+                  Weekly Month
+                </option>
+                <option style={optionStyle} value="636">
+                  Weekly Year
+                </option>
+                <option style={optionStyle} value="640">
+                  Plus Month
+                </option>
+                <option style={optionStyle} value="639">
+                  Plus Year
+                </option>
+                <option style={optionStyle} value="643">
+                  Latam Month
+                </option>
+                <option style={optionStyle} value="642">
+                  Latam Year
+                </option>
+                <option style={optionStyle} value="646">
+                  Impact Month
+                </option>
+                <option style={optionStyle} value="645">
+                  Impact Year
+                </option>
+              </select>
+              <p
+                id="uidnote"
+                className={role && !validrole ? "instructions" : "offscreen"}
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                {lang.myAccount.roleIsRequired}
+              </p>
+            </div>
             <div
               className="btn-group d-flex w-100"
               style={{ justifyContent: "space-around" }}
@@ -206,46 +390,20 @@ const BusinessForm = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="remove-newsletter-btn">
-                  <span>
-                    <AiOutlineMinus />
-                  </span>
-                </td>
-                <td>Brandon</td>
-                <td>Stickler</td>
-                <td>brandon@agresource.com</td>
-              </tr>
-              <tr>
-                <td className="remove-newsletter-btn">
-                  <span>
-                    <AiOutlineMinus />
-                  </span>
-                </td>
-                <td>Brandon</td>
-                <td>Stickler</td>
-                <td>brandon@agresource.com</td>
-              </tr>
-              <tr>
-                <td className="remove-newsletter-btn">
-                  <span>
-                    <AiOutlineMinus />
-                  </span>
-                </td>
-                <td>Brandon</td>
-                <td>Stickler</td>
-                <td>brandon@agresource.com</td>
-              </tr>
-              <tr>
-                <td className="remove-newsletter-btn">
-                  <span>
-                    <AiOutlineMinus />
-                  </span>
-                </td>
-                <td>Brandon</td>
-                <td>Stickler</td>
-                <td>brandon@agresource.com</td>
-              </tr>
+              {list.map((item, key) => {
+                return (
+                  <tr key={key}>
+                    <td className="remove-newsletter-btn">
+                      <span onClick={() => cancelSub(item)}>
+                        <AiOutlineMinus />
+                      </span>
+                    </td>
+                    <td>{item.first_name}</td>
+                    <td>{item.last_name}</td>
+                    <td>{item.forward_email}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
