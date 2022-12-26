@@ -7,6 +7,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
+import logo from "../../assets/reports-image.png";
 import http from "../../utils/http-common";
 import lang from "../../utils/Language";
 
@@ -26,7 +27,6 @@ const ROLE_CODES = {
 const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const style = {
-  appearance: "none",
   backgroundColor: "#EDF1F4",
   border: 0,
   borderRadius: "7px",
@@ -53,6 +53,9 @@ const BusinessForm = () => {
   const [role, setrole] = useState("");
   const [validrole, setValidrole] = useState(false);
   const [roleFocus, setroleFocus] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const [cancelItem, setCancelItem] = useState({});
 
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
@@ -83,11 +86,9 @@ const BusinessForm = () => {
     }, 5000);
   };
 
-  const cancelSub = (data) => {
-    console.log(data);
-    const { first_name, last_name, id, role, subscription_id } = data;
-    const email = data.forward_email;
-
+  const cancelSub = () => {
+    const { first_name, last_name, id, role, subscription_id } = cancelItem;
+    const email = cancelItem.forward_email;
     http
       .post("subscription-userinfo-remove", {
         first_name,
@@ -100,9 +101,15 @@ const BusinessForm = () => {
         setList(
           list.filter(
             (item) =>
-              item.forward_email != email || item.id != id || item.role != role
+              item.forward_email != email ||
+              item.id != id ||
+              item.subscription_id != subscription_id
           )
         );
+        setAllowed({
+          ...allowed,
+          [role]: allowed[role] + 1,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -119,7 +126,7 @@ const BusinessForm = () => {
 
   const handleConfirm = () => {
     if (validFirstName && validLastName && validEmail && validrole) {
-      if (allowed[role] !== undefined && allowed[role] >= 0) {
+      if (allowed[role] !== undefined && allowed[role] > 0) {
         http
           .post("subscription-assign", {
             first_name: firstName,
@@ -135,20 +142,22 @@ const BusinessForm = () => {
             setrole("");
             let x = document.getElementById("addUser");
             x.className = "hide";
-          })
-          .then(() => {
             setList([
               {
                 first_name: firstName,
                 last_name: lastName,
                 forward_email: email,
                 role: role,
+                subscription_id: res.data.data.subscription_id,
+                id: res.data.data.lastid,
               },
               ...list,
             ]);
+          })
+          .then(() => {
             setAllowed({
               ...allowed,
-              role: allowed[role] - 1,
+              [role]: allowed[role] - 1,
             });
           })
           .catch((err) => {
@@ -161,6 +170,11 @@ const BusinessForm = () => {
       launch_toast("Please complete all the fields");
     }
   };
+
+  // useEffect(() => {
+  //   console.log(allowed);
+  // }, [allowed]);
+
   useEffect(() => {
     http.get("business-available-subscription-lists").then((res) => {
       setAllowed(res.data.data[0]);
@@ -341,36 +355,56 @@ const BusinessForm = () => {
                 onBlur={() => setroleFocus(false)}
               >
                 <option style={{}} value=""></option>
-                <option style={optionStyle} value="631">
-                  Daily Month
-                </option>
-                <option style={optionStyle} value="632">
-                  Daily Year
-                </option>
-                <option style={optionStyle} value="637">
-                  Weekly Month
-                </option>
-                <option style={optionStyle} value="636">
-                  Weekly Year
-                </option>
-                <option style={optionStyle} value="640">
-                  Plus Month
-                </option>
-                <option style={optionStyle} value="639">
-                  Plus Year
-                </option>
-                <option style={optionStyle} value="643">
-                  Latam Month
-                </option>
-                <option style={optionStyle} value="642">
-                  Latam Year
-                </option>
-                <option style={optionStyle} value="646">
-                  Impact Month
-                </option>
-                <option style={optionStyle} value="645">
-                  Impact Year
-                </option>
+                {allowed[631] && (
+                  <option style={optionStyle} value="631">
+                    Daily Month ({allowed["631"]})
+                  </option>
+                )}
+                {allowed["632"] && (
+                  <option style={optionStyle} value="632">
+                    Daily Year ({allowed["632"]})
+                  </option>
+                )}
+                {allowed["637"] && (
+                  <option style={optionStyle} value="637">
+                    Weekly Month ({allowed["637"]})
+                  </option>
+                )}
+                {allowed["636"] && (
+                  <option style={optionStyle} value="636">
+                    Weekly Year ({allowed["636"]})
+                  </option>
+                )}
+                {allowed["640"] && (
+                  <option style={optionStyle} value="640">
+                    Plus Month ({allowed["640"]})
+                  </option>
+                )}
+                {allowed["639"] && (
+                  <option style={optionStyle} value="639">
+                    Plus Year ({allowed["639"]})
+                  </option>
+                )}
+                {allowed["643"] && (
+                  <option style={optionStyle} value="643">
+                    Latam Month ({allowed["643"]})
+                  </option>
+                )}
+                {allowed["642"] && (
+                  <option style={optionStyle} value="642">
+                    Latam Year ({allowed["642"]})
+                  </option>
+                )}
+                {allowed["646"] && (
+                  <option style={optionStyle} value="646">
+                    Impact Month ({allowed["646"]})
+                  </option>
+                )}
+                {allowed["645"] && (
+                  <option style={optionStyle} value="645">
+                    Impact Year ({allowed["645"]})
+                  </option>
+                )}
               </select>
               <p
                 id="uidnote"
@@ -415,7 +449,12 @@ const BusinessForm = () => {
                 return (
                   <tr key={key}>
                     <td className="remove-newsletter-btn">
-                      <span onClick={() => cancelSub(item)}>
+                      <span
+                        onClick={() => {
+                          setShowModal(true);
+                          setCancelItem(item);
+                        }}
+                      >
                         <AiOutlineMinus />
                       </span>
                     </td>
@@ -429,6 +468,38 @@ const BusinessForm = () => {
             </tbody>
           </table>
         </div>
+
+        {showModal && (
+          <div className="modal">
+            <div className="modal-inner">
+              <div className="modal-logo">
+                <img src={logo} alt="" />
+              </div>
+              <div className="modal-content">
+                <h3>Are you sure you would like to delete?</h3>
+              </div>
+              <div className="modal-buttons mt-4">
+                <button
+                  className="warning-btn"
+                  onClick={() => {
+                    cancelSub();
+                    setShowModal(false);
+                  }}
+                >
+                  YES, DELETE
+                </button>
+                <button
+                  className="danger-btn"
+                  onClick={() => {
+                    setShowModal(false);
+                  }}
+                >
+                  NO, DO NOT
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
