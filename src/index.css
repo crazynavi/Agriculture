@@ -666,8 +666,8 @@
 .newsletter-overflow {
     margin: 0 160px;
     overflow: auto;
-    min-height: 80vh;
-    height: 80vh;
+    min-height: 70vh;
+    height: 70vh;
 }
 
 .reports-overflow {
