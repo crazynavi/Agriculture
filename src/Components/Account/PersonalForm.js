@@ -15,7 +15,7 @@ import "react-phone-input-2/lib/style.css";
 import LoadingSpinner from "../LoadingSpinner";
 
 const style = {
-  appearance: "none",
+  // appearance: "none",
   backgroundColor: "#EDF1F4",
   border: 0,
   borderRadius: "7px",

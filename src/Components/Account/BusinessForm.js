@@ -10,6 +10,7 @@ import {
 import logo from "../../assets/reports-image.png";
 import http from "../../utils/http-common";
 import lang from "../../utils/Language";
+import LoadingSpinner from "../LoadingSpinner";
 
 const ROLE_CODES = {
   631: "Daily Month",
@@ -27,17 +28,20 @@ const ROLE_CODES = {
 const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const style = {
+  appearance: "none",
   backgroundColor: "#EDF1F4",
   border: 0,
   borderRadius: "7px",
-  padding: "15px",
+  padding: "15px 0",
   marginTop: "5px",
-  width: "calc(100% - 30px)",
+  width: "100%",
 };
 const optionStyle = {
   fontSize: "20px",
 };
 const BusinessForm = () => {
+  const [loading, setLoading] = useState(false);
+
   const [firstName, setFirstName] = useState("");
   const [validFirstName, setValidFirstName] = useState(false);
   const [firstNameFocus, setFirstNameFocus] = useState(false);
@@ -172,16 +176,17 @@ const BusinessForm = () => {
   };
 
   // useEffect(() => {
-  //   console.log(allowed);
-  // }, [allowed]);
+  //   console.log(loading);
+  // }, [loading]);
 
   useEffect(() => {
+    setLoading(true);
     http.get("business-available-subscription-lists").then((res) => {
       setAllowed(res.data.data[0]);
     });
     http.get("account-business").then((res) => {
       setList(res.data.data);
-    });
+    }).then(setLoading(false));
   }, []);
   useEffect(() => {
     setValidFirstName(USER_REGEX.test(firstName));
@@ -199,6 +204,11 @@ const BusinessForm = () => {
   return (
     <>
       <div className="box-container mt-4">
+        {loading && (
+          <div className="p-2">
+            <LoadingSpinner />
+          </div>
+        )}
         <div id="toast" className="error_toast">
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faTimes} />
@@ -339,73 +349,75 @@ const BusinessForm = () => {
                   className={validrole || !role ? "hide" : "invalid"}
                 />
               </label>
-              <select
-                className="form-control"
-                style={style}
-                name="role"
-                id="role"
-                autoComplete="off"
-                value={role}
-                onChange={(e) => {
-                  setrole(e.target.value);
-                }}
-                aria-invalid={validrole ? "false" : "true"}
-                aria-describedby="uidnote"
-                onFocus={() => setroleFocus(true)}
-                onBlur={() => setroleFocus(false)}
-              >
-                <option style={{}} value=""></option>
-                {allowed[631] && (
-                  <option style={optionStyle} value="631">
-                    Daily Month ({allowed["631"]})
-                  </option>
-                )}
-                {allowed["632"] && (
-                  <option style={optionStyle} value="632">
-                    Daily Year ({allowed["632"]})
-                  </option>
-                )}
-                {allowed["637"] && (
-                  <option style={optionStyle} value="637">
-                    Weekly Month ({allowed["637"]})
-                  </option>
-                )}
-                {allowed["636"] && (
-                  <option style={optionStyle} value="636">
-                    Weekly Year ({allowed["636"]})
-                  </option>
-                )}
-                {allowed["640"] && (
-                  <option style={optionStyle} value="640">
-                    Plus Month ({allowed["640"]})
-                  </option>
-                )}
-                {allowed["639"] && (
-                  <option style={optionStyle} value="639">
-                    Plus Year ({allowed["639"]})
-                  </option>
-                )}
-                {allowed["643"] && (
-                  <option style={optionStyle} value="643">
-                    Latam Month ({allowed["643"]})
-                  </option>
-                )}
-                {allowed["642"] && (
-                  <option style={optionStyle} value="642">
-                    Latam Year ({allowed["642"]})
-                  </option>
-                )}
-                {allowed["646"] && (
-                  <option style={optionStyle} value="646">
-                    Impact Month ({allowed["646"]})
-                  </option>
-                )}
-                {allowed["645"] && (
-                  <option style={optionStyle} value="645">
-                    Impact Year ({allowed["645"]})
-                  </option>
-                )}
-              </select>
+              <div className="subtype-selection">
+                <select
+                  className="form-control"
+                  style={style}
+                  name="role"
+                  id="role"
+                  autoComplete="off"
+                  value={role}
+                  onChange={(e) => {
+                    setrole(e.target.value);
+                  }}
+                  aria-invalid={validrole ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setroleFocus(true)}
+                  onBlur={() => setroleFocus(false)}
+                >
+                  <option style={optionStyle} value=""></option>
+                  {allowed[631] && (
+                    <option style={optionStyle} value="631">
+                      Daily Month ({allowed["631"]})
+                    </option>
+                  )}
+                  {allowed["632"] && (
+                    <option style={optionStyle} value="632">
+                      Daily Year ({allowed["632"]})
+                    </option>
+                  )}
+                  {allowed["637"] && (
+                    <option style={optionStyle} value="637">
+                      Weekly Month ({allowed["637"]})
+                    </option>
+                  )}
+                  {allowed["636"] && (
+                    <option style={optionStyle} value="636">
+                      Weekly Year ({allowed["636"]})
+                    </option>
+                  )}
+                  {allowed["640"] && (
+                    <option style={optionStyle} value="640">
+                      Plus Month ({allowed["640"]})
+                    </option>
+                  )}
+                  {allowed["639"] && (
+                    <option style={optionStyle} value="639">
+                      Plus Year ({allowed["639"]})
+                    </option>
+                  )}
+                  {allowed["643"] && (
+                    <option style={optionStyle} value="643">
+                      Latam Month ({allowed["643"]})
+                    </option>
+                  )}
+                  {allowed["642"] && (
+                    <option style={optionStyle} value="642">
+                      Latam Year ({allowed["642"]})
+                    </option>
+                  )}
+                  {allowed["646"] && (
+                    <option style={optionStyle} value="646">
+                      Impact Month ({allowed["646"]})
+                    </option>
+                  )}
+                  {allowed["645"] && (
+                    <option style={optionStyle} value="645">
+                      Impact Year ({allowed["645"]})
+                    </option>
+                  )}
+                </select>
+              </div>
               <p
                 id="uidnote"
                 className={role && !validrole ? "instructions" : "offscreen"}
@@ -441,7 +453,7 @@ const BusinessForm = () => {
                 <th>{lang.myAccount.firstName}</th>
                 <th>{lang.myAccount.lastName}</th>
                 <th>{lang.myAccount.email}</th>
-                <th>Subscription_id</th>
+                <th>Subscription Type</th>
               </tr>
             </thead>
             <tbody>

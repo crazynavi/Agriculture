@@ -519,7 +519,7 @@
 .top-tabs>div {
     max-width: 13%;
     text-align: center;
-    font-size: 24px;
+    font-size: 1.3vw;
     font-weight: 600;
     background-color: #F78D1F;
     color: white;
@@ -595,7 +595,7 @@
 }
 
 .form-items input {
-    width: calc(100% - 30px);
+    width: calc(100%);
     background-color: #EDF1F4;
     border: 0;
     border-radius: 7px;
@@ -664,7 +664,7 @@
 
 .reports-overflow,
 .newsletter-overflow {
-    margin: 0 160px;
+    margin: 0 100px;
     overflow: auto;
     min-height: 70vh;
     height: 70vh;
@@ -687,6 +687,21 @@
     width: 100%;
     border-spacing: 0 10px
 }
+.subtype-selection {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+  }
+.subtype-selection::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    font-size: 1.5em;
+    right: 0px;
+    padding: 0.5em 0.5em;
+    transition: .25s all ease;
+    pointer-events: none;
+  }
 
 .newsletter-overflow table th,
 .newsletter-overflow table td {
