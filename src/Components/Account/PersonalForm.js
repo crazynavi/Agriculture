@@ -5,13 +5,13 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
-import lang from '../../utils/Language';
+import lang from "../../utils/Language";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AiOutlineMinus } from "react-icons/ai";
-import http from '../../utils/http-common';
+import http from "../../utils/http-common";
 import PhoneInput from "react-phone-input-2";
-import 'react-phone-input-2/lib/style.css'
+import "react-phone-input-2/lib/style.css";
 import LoadingSpinner from "../LoadingSpinner";
 
 const style = {
@@ -32,24 +32,23 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_NUMBER_REGEX = /^[0-9]{10,13}$/;
 
 const PersonalForm = (props) => {
-
   const userRef = useRef();
   const errRef = useRef();
 
   const [loading, setLoading] = useState(false);
 
   const [firstName, setFirstName] = useState("");
-  const [validFirstName, setValidFirstName] = useState(false);
+  const validFirstName = USER_REGEX.test(firstName);
   const [firstNameFocus, setFirstNameFocus] = useState(false);
 
   const [lastName, setLasttName] = useState("");
-  const [validLastName, setValidLastName] = useState(false);
+  const validLastName = USER_REGEX.test(lastName);
   const [lastNameFocus, setlastNameFocus] = useState(false);
 
   const [company, setCompany] = useState("");
 
   const [occupation, setOccupation] = useState("");
-  const [validOccupation, setValidOccupation] = useState(false);
+  const validOccupation = occupation !== "" ? true : false;
   const [occupationFocus, setOccupationFocus] = useState(false);
 
   // const [address, setAddress] = useState("");
@@ -62,13 +61,12 @@ const PersonalForm = (props) => {
   const [postal, setPostal] = useState("");
 
   const [email, setEmail] = useState("");
-  const [validEmail, setValidEmail] = useState(false);
+  const validEmail = EMAIL_REGEX.test(email);
   const [emailFocus, setEmailFocus] = useState(false);
 
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [validPhoneNumber, setValidPhoneNumber] = useState(false);
+  const validPhoneNumber = PHONE_NUMBER_REGEX.test(Number(phoneNumber));
   const [phoneNumberFocus, setPhoneNumberFocus] = useState(false);
-
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
@@ -80,122 +78,122 @@ const PersonalForm = (props) => {
     let xxx = document.getElementsByClassName("error_toast");
     let x = xxx[0];
     x.className = "error_toast show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
-  }
+    setTimeout(function () {
+      x.className = x.className.replace("show", "");
+    }, 5000);
+  };
   const launch_toast2 = () => {
     let xxx = document.getElementsByClassName("success_toast");
     let x = xxx[0];
     x.className = "success_toast show";
-    setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
-  }
+    setTimeout(function () {
+      x.className = x.className.replace("show", "");
+    }, 5000);
+  };
   useEffect(() => {
     console.log(updateState);
     console.log(currentTab);
-    let validated = validEmail && validFirstName && validLastName && validOccupation && validPhoneNumber;
-    if (currentTab === "personal", updateState !== 0) {
+    let validated =
+      validEmail &&
+      validFirstName &&
+      validLastName &&
+      validOccupation &&
+      validPhoneNumber;
+    if ((currentTab === "personal", updateState !== 0)) {
       if (validated) {
         setLoading(true);
-        http.post("account/update", { first_name: firstName, last_name: lastName, email: email, phone: phoneNumber, country: country, city: city, state: userstate, zip: postal, occupation: occupation, company: company })
+        http
+          .post("account/update", {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            phone: phoneNumber,
+            country: country,
+            city: city,
+            state: userstate,
+            zip: postal,
+            occupation: occupation,
+            company: company,
+          })
           .then((res) => {
             launch_toast2();
           })
-          .then(()=>{
+          .then(() => {
             setLoading(false);
           })
-          .catch(
-            (err) => {
-              console.log(err);
-            });
-
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         launch_toast();
       }
     }
-  }, [updateState])
+  }, [updateState]);
 
   useEffect(() => {
     setLoading(true);
-    http.get("account").then((res) => {
-      const data = res.data.data;
-      setFirstName(data.first_name);
-      setLasttName(data.last_name);
-      setEmail(data.email);
-      setCompany(data.company);
-      setOccupation(data.occupation);
-      setCity(data.city);
-      setUserstate(data.state);
-      setPostal(data.zip);
-      setPhoneNumber(data.phone);
-      setCountry(data.country);
-    }).then(()=>{setLoading(false)});
+    http
+      .get("account")
+      .then((res) => {
+        const data = res.data.data;
+        setFirstName(data.first_name);
+        setLasttName(data.last_name);
+        setEmail(data.email);
+        setCompany(data.company);
+        setOccupation(data.occupation);
+        setCity(data.city);
+        setUserstate(data.state);
+        setPostal(data.zip);
+        setPhoneNumber(data.phone);
+        setCountry(data.country);
+      })
+      .then(() => {
+        setLoading(false);
+      });
   }, []);
 
   useEffect(() => {
-    http.get("get_device_infos").then((res) => {
-      setDevices(res.data.data);
-    }).catch((err) => {
-      console.log(err);
-    })
+    http
+      .get("get_device_infos")
+      .then((res) => {
+        setDevices(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   useEffect(() => {
     userRef.current.focus();
   }, []);
-  useEffect(() => {
-    setValidFirstName(USER_REGEX.test(firstName));
-  }, [firstName]);
-
-  useEffect(() => {
-    setValidLastName(USER_REGEX.test(lastName));
-  }, [lastName]);
-
-  useEffect(() => {
-    setValidEmail(EMAIL_REGEX.test(email));
-  }, [email]);
-
-  useEffect(() => {
-    setValidPhoneNumber(PHONE_NUMBER_REGEX.test(Number(phoneNumber)));
-    // switch (phoneNumber.length) {
-    // 	case 3: case 7: setPhoneNumber((phoneNumber) => phoneNumber + '-');
-    // }
-  }, [phoneNumber]);
-
-  useEffect(() => {
-    setValidOccupation(occupation !== "" ? true : false);
-  }, [occupation]);
 
   useEffect(() => {
     setErrMsg("");
   }, [email, phoneNumber]);
 
-  const cancelDevice = (device) =>{
+  const cancelDevice = (device) => {
     let key = device.meta_key[8];
-    http.post("remove_device_info", {device_id:key})
-    .then((res) => {
-      let new_devices = devices.filter((dev)=>{
-        return dev != device
+    http
+      .post("remove_device_info", { device_id: key })
+      .then((res) => {
+        let new_devices = devices.filter((dev) => {
+          return dev != device;
+        });
+        setDevices(new_devices);
       })
-      setDevices(new_devices);
-    })
-    .catch(
-      (err) => {
+      .catch((err) => {
         console.log(err);
       });
-  }
-  // useEffect(()=>{
-  //   if(validEmail&&validFirstName&&validLastName&&validOccupation&&validPhoneNumber){
-  //     setValid(true);
-  //   }else{
-  //     setValid(false);
-  //   }
-  // },[validEmail,validFirstName,validLastName,validOccupation,validPhoneNumber]);
+  };
   return (
     <>
       <div className="box-container mt-4">
         <h1 className="text-center">{lang.myAccount.userInformation}</h1>
-        {loading&&<div className="p-2">
-        <LoadingSpinner />
-        </div>}
+        {loading && (
+          <div className="p-2">
+            <LoadingSpinner />
+          </div>
+        )}
         <div id="toast" className="error_toast">
           <div id="img" className="bg-info">
             <FontAwesomeIcon icon={faTimes} />
@@ -243,7 +241,6 @@ const PersonalForm = (props) => {
               }
             >
               <FontAwesomeIcon icon={faInfoCircle} />
-              
             </p>
           </div>
           <div className="form-items">
@@ -260,7 +257,7 @@ const PersonalForm = (props) => {
               />
             </label>
             <input
-            disabled={loading}
+              disabled={loading}
               type="text"
               id="lastname"
               name={"last_name"}
@@ -285,7 +282,7 @@ const PersonalForm = (props) => {
           <div className="form-items">
             <label>{lang.myAccount.company}</label>
             <input
-            disabled={loading}
+              disabled={loading}
               type={"text"}
               name={"company"}
               value={company}
@@ -364,21 +361,10 @@ const PersonalForm = (props) => {
               {lang.myAccount.occupationIsRequired}
             </p>
           </div>
-          {/* <div className="form-items w-100">
-            <label>Address:</label>
-            <input
-              type={"text"}
-              name={"address"}
-              value={address}
-              onChange={(e) => {
-                setAddress(e.target.value);
-              }}
-            />
-          </div> */}
           <div className="form-items w-medium">
             <label>{lang.myAccount.country}</label>
             <input
-            disabled={loading}
+              disabled={loading}
               type={"text"}
               name={"country"}
               value={country}
@@ -390,7 +376,7 @@ const PersonalForm = (props) => {
           <div className="form-items w-medium">
             <label>{lang.myAccount.city}</label>
             <input
-            disabled={loading}
+              disabled={loading}
               type={"text"}
               name={"city"}
               value={city}
@@ -402,7 +388,7 @@ const PersonalForm = (props) => {
           <div className="form-items w-small">
             <label>{lang.myAccount.state}</label>
             <input
-            disabled={loading}
+              disabled={loading}
               name={"state"}
               value={userstate}
               onChange={(e) => {
@@ -414,7 +400,7 @@ const PersonalForm = (props) => {
           <div className="form-items w-small">
             <label>{lang.myAccount.postal}</label>
             <input
-            disabled={loading}
+              disabled={loading}
               name={"postal"}
               value={postal}
               onChange={(e) => {
@@ -438,19 +424,8 @@ const PersonalForm = (props) => {
                 }
               />
             </label>
-            {/* <PhoneInput
-              name="phone_number"
-              id="phone"
-              country={'us'}
-              value={phoneNumber}
-              onChange={phone => setPhoneNumber({ phone })}
-              aria-invalid={phoneNumber ? "false" : "true"}
-              aria-describedby="uidnote"
-              onFocus={() => setPhoneNumberFocus(true)}
-              onBlur={() => setPhoneNumberFocus(false)}
-            /> */}
             <input
-            disabled={loading}
+              disabled={loading}
               type="text"
               name="phone_number"
               id="phone"
@@ -486,7 +461,7 @@ const PersonalForm = (props) => {
               />
             </label>
             <input
-            disabled={loading}
+              disabled={loading}
               type="text"
               id="email"
               name={"email"}
@@ -511,14 +486,24 @@ const PersonalForm = (props) => {
       <div className="box-container mt-4">
         <h1 className="text-center">{lang.myAccount.devices}</h1>
         <div className="devices-section mt-3 mb-4 d-flex flex-wrap align-items-cener">
-          {devices.map((device, index)=>{
-            return(
-              <div key={index} className="d-flex p-2 justify-content-start align-items-center">
-              <span onClick={()=>{cancelDevice(device)}} className="me-2">
-                <AiOutlineMinus />
-              </span>
-              <div>{device.meta_value} {lang.myAccount.deviceAdded}</div>
-            </div>
+          {devices.map((device, index) => {
+            return (
+              <div
+                key={index}
+                className="d-flex p-2 justify-content-start align-items-center"
+              >
+                <span
+                  onClick={() => {
+                    cancelDevice(device);
+                  }}
+                  className="me-2"
+                >
+                  <AiOutlineMinus />
+                </span>
+                <div>
+                  {device.meta_value} {lang.myAccount.deviceAdded}
+                </div>
+              </div>
             );
           })}
         </div>
