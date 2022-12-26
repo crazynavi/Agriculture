@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { isRoleAllowed } from "../utils/isRoleAllowed";
@@ -8,7 +8,6 @@ import { BsCreditCard2Front } from "react-icons/bs";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { SiDatabricks } from "react-icons/si";
 import { FaInstagramSquare } from "react-icons/fa";
-import { social } from "../utils/getTokendata";
 
 import lang from "../utils/Language";
 
@@ -18,7 +17,7 @@ import {
   AiOutlineTwitter,
   AiFillFacebook,
 } from "react-icons/ai";
-import { BrowserRouter, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const redirectToHome = () => {
   window.location.href = "";
 };
