@@ -57,9 +57,7 @@ const SideNav = () => {
                   <NavLink to={"report-latam"}>{lang.navbar.latam}</NavLink>
                 )}
                 {isRoleAllowed([645, 646, 647]) && (
-                  <NavLink to={"report-climate"}>
-                    {lang.navbar.climate}
-                  </NavLink>
+                  <NavLink to={"report-climate"}>{lang.navbar.climate}</NavLink>
                 )}
               </div>
             </div>
@@ -92,20 +90,22 @@ const SideNav = () => {
       </div>
       <div className="w-100">
         <p>{lang.navbar.followAg}</p>
-        <div className="social-icons mt-2  d-flex justify-content-between">
-          <a href={social.linkdin} target='_blank'>
-            <AiFillLinkedin />
-          </a>
-          <a href={social.twitter} target='_blank'>
-            <AiOutlineTwitter />
-          </a>
-          <a href={social.facebook} target='_blank'>
-            <AiFillFacebook />
-          </a>
-          <a href={social.instagram} target='_blank'>
-            <FaInstagramSquare />
-          </a>
-        </div>
+        {social && (
+          <div className="social-icons mt-2  d-flex justify-content-between">
+            <a href={social.linkdin} target="_blank">
+              <AiFillLinkedin />
+            </a>
+            <a href={social.twitter} target="_blank">
+              <AiOutlineTwitter />
+            </a>
+            <a href={social.facebook} target="_blank">
+              <AiFillFacebook />
+            </a>
+            <a href={social.instagram} target="_blank">
+              <FaInstagramSquare />
+            </a>
+          </div>
+        )}
         <div className="d-flex">
           <div className="client-img me-2 align-items-center">
             <img
