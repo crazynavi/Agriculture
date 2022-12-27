@@ -687,6 +687,9 @@
     width: 100%;
     border-spacing: 0 10px
 }
+.newsletter-overflow table th,.newsletter-overflow table td{
+    text-align: center!important;
+}
 .subtype-selection {
     position: relative;
     display: flex;
