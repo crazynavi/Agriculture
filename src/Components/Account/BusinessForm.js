@@ -32,7 +32,7 @@ const style = {
   backgroundColor: "#EDF1F4",
   border: 0,
   borderRadius: "7px",
-  padding: "15px 0",
+  padding: "15px",
   marginTop: "5px",
   width: "100%",
 };
@@ -186,7 +186,8 @@ const BusinessForm = () => {
     });
     http.get("account-business").then((res) => {
       setList(res.data.data);
-    }).then(setLoading(false));
+      console.log(res.data.data);
+    }).then(()=>setLoading(false));
   }, []);
   useEffect(() => {
     setValidFirstName(USER_REGEX.test(firstName));
@@ -339,7 +340,7 @@ const BusinessForm = () => {
             <div className="form-items">
               <label htmlFor="role">
                 <span className="required-icon">* </span>
-                Role
+                Please choose the subscription type
                 <FontAwesomeIcon
                   icon={faCheck}
                   className={validrole ? "valid" : "hide"}
@@ -365,7 +366,7 @@ const BusinessForm = () => {
                   onFocus={() => setroleFocus(true)}
                   onBlur={() => setroleFocus(false)}
                 >
-                  <option style={optionStyle} value=""></option>
+                  {/* <option style={optionStyle} value=""></option> */}
                   {allowed[631] && (
                     <option style={optionStyle} value="631">
                       Daily Month ({allowed["631"]})
